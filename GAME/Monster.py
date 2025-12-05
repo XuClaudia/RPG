@@ -60,3 +60,7 @@ class Troll(Monster):
             
         print(self.monster_type, "attacks for", damage, "damage")
         return damage
+    #--------------------------------Verschillende soort monsters -----------------------------------------
+# Spelertype 1: Ice king(Archer) Spelertype 2: Finn(sword player) Spelertype 3: Tree Trunks (archer)
+# Wapens voor type 1: a. Snowball b. Iceicle c. gunter(dingen gooien) Type 2: a. Pocket knife b. Finn's sword c. Katana Type: 3: a. spoon b. Rock c. Apple pie
+# Monsters die tegenkomt: A. Zombie B. Candy C. vampire D. Jelly Cube E. Evil Eyes F. Goo skulls
