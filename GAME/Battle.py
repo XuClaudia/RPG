@@ -1,5 +1,5 @@
 from Item import Item, Weapon, Armor
-from Monster import Monster, Skeleton, Troll
+from Monster import Monster, Evil_Eyes, Goo_Skulls
 import random
 
 class Battle:
@@ -8,14 +8,14 @@ class Battle:
         self.difficulty = random.randint(1,3) #naar aantal monsters
         self.monster_list = []
         self.xp_value = 0
-        monster_type = ["Skeleton", "Troll"]
+        monster_type = ["Evil_Eyes", "Goo_Skulls"]
         
         for i in range(self.difficulty): #monsters maken
             monster_choice = random.choice(monster_type)
-            if monster_choice == "Skeleton":
-                self.monster_list.append(Skeleton(self.player.level))
-            elif monster_choice == "Troll":
-                self.monster_list.append(Troll(self.player.level))
+            if monster_choice == "Evil_Eyes":
+                self.monster_list.append(Evil_Eyes(self.player.level))
+            elif monster_choice == "Goo_Skulls":
+                self.monster_list.append(Goo_Skulls(self.player.level))
                 
             self.xp_value += self.monster_list[i].xp_value
             
@@ -183,4 +183,5 @@ class Battle:
                  
                 break
                 
+
             
