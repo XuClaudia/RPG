@@ -30,21 +30,21 @@ class Monster:
 
 import random
 
-class Skeleton(Monster):
+class Evil_Eyes(Monster):
     def __init__(self, level):
         Monster.__init__(self, level)
         
-        self.monster_type = "Skeleton"
+        self.monster_type = "Evil_Eyes"
         self.hp = self.max_hp = self.level * 15
         self.min_damage = self.level + 1
         self.max_damage = self.level * 3
         self.xp_value = 100 + self.level * 20
 
-class Troll(Monster):
+class Goo_Skulls(Monster):
     def __init__(self, level):
         Monster.__init__(self, level)
         
-        self.monster_type = "Troll"
+        self.monster_type = "Goo_Skulls"
         self.hp = self.max_hp = self.level * 20
         self.min_damage = 1
         self.max_damage = self.level * 4
@@ -64,3 +64,4 @@ class Troll(Monster):
 # Spelertype 1: Ice king(Archer) Spelertype 2: Finn(sword player) Spelertype 3: Tree Trunks (archer)
 # Wapens voor type 1: a. Snowball b. Iceicle c. gunter(dingen gooien) Type 2: a. Pocket knife b. Finn's sword c. Katana Type: 3: a. spoon b. Rock c. Apple pie
 # Monsters die tegenkomt: A. Zombie B. Candy C. vampire D. Jelly Cube E. Evil Eyes F. Goo skulls
+
