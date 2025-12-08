@@ -13,14 +13,11 @@ class Player:
         self.weapon = Weapon(1)
         self.armor = Armor (1)
 
-
-    
     def attack(self):
         damage = self.level + random.randint(self.weapon.min_damage, self.weapon.max_damage)
         print(self.name, "attacks with a", self.weapon.weapon_type, "for", damage, "damage")
         return damage
-    
-        
+  
     def take_hit(self, damage):
         final_damage = damage - self.armor.defence
         if final_damage> 0:
@@ -66,8 +63,6 @@ class Player:
             
         self.print_stats()
     
-    
-    
     def print_stats(self):
         print()
         print("###################################################################################")
@@ -81,5 +76,5 @@ class Player:
         self.weapon.print_stats()
         self.armor.print_stats()
         print("###########################################")
+        
 
-    
