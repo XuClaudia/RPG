@@ -33,7 +33,16 @@ class Monster:
 # Monsters die tegenkomt: A. Zombie B. Candy C. vampire D. Jelly Cube E. Evil Eyes F. Goo skulls
 
 import random
-Class Zom
+class Zombie(Monster): 
+    def __init__(self, level):
+        Monster.__init__(self, level)
+
+        self.monster_type = "Zombie"
+        self.hp = self.max_hp = self.level * 10
+        self.min_damage = 1
+        self.max_damage = self.level * 2
+        self.xp_value = 100 + self.level * 15
+
 class Vampire(Monster):
     def __init__(self, level):
         Monster.__init__(self, level)
@@ -64,5 +73,6 @@ class Goo_Skulls(Monster):
             
         print(self.monster_type, "attacks for", damage, "damage")
         return damage
+
 
 
