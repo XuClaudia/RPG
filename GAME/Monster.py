@@ -39,9 +39,9 @@ class Zombie(Monster):
 
         self.monster_type = "Zombie"
         self.hp = self.max_hp = self.level * 10
-        self.min_damage = 1
-        self.max_damage = self.level * 2
-        self.xp_value = 100 + self.level * 15
+        self.min_damage = self.weapon.min_damage + 1
+        self.max_damage = self.weapon.max_damage * 2
+        self.xp_value = 100 + self.level * 25
 
 class Vampire(Monster):
     def __init__(self, level):
@@ -73,6 +73,7 @@ class Goo_Skulls(Monster):
             
         print(self.monster_type, "attacks for", damage, "damage")
         return damage
+
 
 
 
