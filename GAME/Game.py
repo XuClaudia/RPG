@@ -4,13 +4,24 @@ from Item import Item, Weapon, Armor
 from Monster import Monster, Skeleton, Troll
 from Battle import Battle
 
+player_name = " "
+            while player_action not in ["A","B","C"]:
+                player_name = input("Who do you want to be? (A): Ice king, (B): Finn, (C): Three trunks").upper()  #Speler kiest A, B of C 
+                print()
 
-player_name = input("What is your name?")
-player = Player(player_name)
+player = Player(player_name) #Naam wordt A, B, C
 
+if name == "A":
+    player_type = "Ice king"
+elif name == "B":
+    player_type = "Finn"
+elif name == "C":
+    player_type = "Three trunks"
+######################code bedenken die de types een type geeft
 print()
-print("Good luck", player_name, "Everyone is counting on you")
+print("Good luck", player_type, "Everyone is counting on you")
 input("Press enter to enter the dungeon")
+
 
 battle_count = 0
 
@@ -29,6 +40,7 @@ print("Your final stats are:")
 player.print_stats()
 print()
 print("Thanks for playing")
+
 
 
 
