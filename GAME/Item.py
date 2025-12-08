@@ -14,16 +14,32 @@ class Weapon(Item):
         Item.__init__(self, item_level)
         
         self.item_type = "Weapon"
-        weapon_list =["Sword", "Axe"]
-        self.weapon_type = random.choice(weapon_list)
-        if self.weapon_type == "Sword":
+        
+###~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        if player_type == "Finn" :
+            weapon_list = weapon_list_Finn = ["Pocket knife", "Sword", "Katana"]
+        elif player_type == "Ice_king":
+            weapon_list = weapon_list_Ice_king = ["Snow ball", "icicle", "Gunter"]
+        elif player_type == "Three_trunks" :
+            weapon_list = weapon_list_Three_trunks = ["Spoon", "Rock", "Apple pie"]
+
+
+
+        #self.weapon_type = random.choice(weapon_list)
+        self.weapon_type = weapon_list[1]
+        ### ik geef nu aan alle wapens op plek 1 dezelfde damage en plaats twee enz.
+        if self.weapon_type == weapon_list[1]:
             self.min_damage = self.item_level * 2
             self.max_damage = self.item_level * 3
         
-        elif self.weapon_type == "Axe":
-            self.min_damage= 1
+        elif self.weapon_type == weapon_list[2]:
+            self.min_damage= 3
             self.max_damage = self.item_level * 4
-            
+
+        elif self.weapon_type == weapon_list[3]:
+            self.min_damage = 5
+            self.max_damage = self.item_level * 6
+###~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     def print_stats(self):
         Item.print_stats(self)
         print(self.weapon_type, "damage:", self.min_damage, "-", self.max_damage)
@@ -38,3 +54,4 @@ class Armor(Item):
         Item.print_stats(self)
         print("Defence:", self.defence)
         
+
