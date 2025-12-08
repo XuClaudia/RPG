@@ -12,6 +12,8 @@ class Player:
         self.name = name
         self.weapon = Weapon(1)
         self.armor = Armor (1)
+
+
     
     def attack(self):
         damage = self.level + random.randint(self.weapon.min_damage, self.weapon.max_damage)
@@ -79,4 +81,5 @@ class Player:
         self.weapon.print_stats()
         self.armor.print_stats()
         print("###########################################")
+
     
