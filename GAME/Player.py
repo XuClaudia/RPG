@@ -1,5 +1,6 @@
 from Item import Item, Weapon, Armor
 import random
+import time
 
 class Player:
     level = 1
@@ -10,7 +11,7 @@ class Player:
     
     def __init__(self, name):
         self.name = name
-        self.weapon = Weapon(1)
+        self.weapon = Weapon (1, name)
         self.armor = Armor (1)
 
 
@@ -70,8 +71,29 @@ class Player:
     
     def print_stats(self):
         print()
+        for stats in "iets":
+             print("###################################################################################", end="", flush=True)
+             print("#######", self.name, " stats: ######################################################", end="", flush=True)
+             print("###################################################################################", end="", flush=True)
+             print("Name: ", self.name, end="", flush=True)
+             print("Level: ", self.level, end="", flush=True)
+             print("HP: ", self.hp, "/", self.max_hp, end="", flush=True)
+             print("XP: ", self.xp, "/", self.next_level_xp, end="", flush=True)
+             print("-------------------------------------------", end="", flush=True)
+             self.weapon.print_stats()
+             self.armor.print_stats()
+             print("###########################################", end="", flush=True)
+            
+        
+        '''
+        for letter in "###################################################################################":
+            print(letter)
+            time.sleep(1)
+            
+        '''
+        '''
         print("###################################################################################")
-        print("#######", self.name, " stats: #############################################################")
+        print("#######", self.name, " stats: ######################################################")
         print("###################################################################################")
         print("Name: ", self.name)
         print("Level: ", self.level)
@@ -81,6 +103,6 @@ class Player:
         self.weapon.print_stats()
         self.armor.print_stats()
         print("###########################################")
-
     
+
 
