@@ -1,3 +1,4 @@
+#tekst letter voor letter laten verschijnen en niet in een pak
 import random
 import time
 from Player import Player
@@ -5,6 +6,7 @@ from Item import Item, Weapon, Armor
 from Monster import Zombie, Vampire, Goo_Skulls
 from Battle import Battle
 
+#welcome screen
 print("Hey! Hello there!")
 input("[PRESS ENTER TO CONTINUE]")
 print("Welcome to the world of ...")
@@ -18,6 +20,8 @@ print("The fun will never end, it's Adventure Time")
 time.sleep(1.5)
 input("[PRESS ENTER TO CONTINUE]")
 print()
+
+#spelertype 
 player_name = " "
 while player_name not in ["A","B","C", "FINN", "ICE KING", "THREE TRUNKS"]:
     player_name = input("Who do you want to be? (A): Ice king, (B): Finn, (C): Three trunks\n").upper()  #Speler kiest A, B of C 
@@ -25,16 +29,22 @@ while player_name not in ["A","B","C", "FINN", "ICE KING", "THREE TRUNKS"]:
 
 
 if player_name == "A" or player_name == "Ice king":
-    player_name ="Ice king"
+    player = Player("Ice king") 
 elif player_name == "B" or player_name == "Finn":
-    player_name ="Finn" 
+    player = Player("Finn") 
 elif player_name == "C" or player_name == "Three trunks":
-    player_name ="Three trunks"
-######################code bedenken die de types een type geeft
+    player = Player("Three trunks") 
+ 
+#player = Player(player_name)
+    
 print()
-print("Good luck", player_name, "Everyone is counting on you")
-input("Press enter to enter the dungeon")
-player = Player(player_name) #Naam wordt A, B, C
+print("Hi", player.name, ", you are entering the world of adventure time....")
+for letter in "BEAWARE!!":
+            print(letter)
+            time.sleep(0.25)
+            
+input("[PRESS ENTER TO CONTINUE]")
+
 
 battle_count = 0
 
@@ -53,6 +63,15 @@ print("Your final stats are:")
 player.print_stats()
 print()
 print("Thanks for playing")
+
+
+
+
+
+
+
+
+
 
 
 
