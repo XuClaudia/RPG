@@ -51,7 +51,7 @@ class Battle:
             
             if loot_type == "Weapon":
                 item = Weapon(random.randint(self.player.level, self.player.level + 1))
-                print("YAy, the monsters dropped new weapon")
+                print("Yay, the monsters dropped new weapon")
             elif loot_type == "Armor":
                 item = Armor(random.randint(self.player.level, self.player.level + 1))
                 print("Yay, the monsters dropped new armor")
@@ -80,7 +80,7 @@ class Battle:
             
     def monster_attack(self):
         for monster in self.monster_list:
-            if monster.hp >0:
+            if monster.hp > 0:
                 monster_damage = monster.attack()
                 self.player.take_hit(monster_damage)
     
@@ -183,6 +183,4 @@ class Battle:
                  
                 break
                 
-
-            
 
