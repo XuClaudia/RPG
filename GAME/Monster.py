@@ -72,12 +72,26 @@ class Vampire(Monster):
         self.max_damage = self.level * 3
         self.xp_value = 100 + self.level * 20
 
+class Jelly(Monster):
+    def __init__(self, level):
+        Monster.__init__(self, level)
+
+        self.monster_type = "Jelly"
+
+
+class Evil_eyes(Monster):
+    def __init__(self, level):
+        Monster.__init__(self, level)
+
+        self.monster_type = "Evil Eyes"
+
+
 class Goo_Skulls(Monster):
     def __init__(self, level):
         Monster.__init__(self, level)
         print("You will die just like ME MUHAHAHAHAHA")
         
-        self.monster_type = "Goo_Skulls"
+        self.monster_type = "Goo Skulls"
         self.hp = self.max_hp = self.level * 20
         self.min_damage = 1
         self.max_damage = self.level * 4
@@ -93,8 +107,3 @@ class Goo_Skulls(Monster):
             
         print(self.monster_type, "attacks for", damage, "damage")
         return damage
-
-
-
-
-
