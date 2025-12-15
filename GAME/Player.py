@@ -56,7 +56,27 @@ class Player:
             self.next_level_xp = int(self.next_level_xp * 1.25)
             self.max_hp = int(self.max_hp * 1.2)
             self.hp = self.max_hp
-            print("YAYYY! You have reached level", self.level, "!")
+           
+            if self.level = 1:
+                #wordt level 2
+                self.weapon_type = weapon_list[1]
+                print("YAYYY! You have reached level", self.level, "!")
+            elif self.level = 2:
+                #wordt level 3
+                self.weapon_type = weapon_list[2]
+                print("YAYYY! You have reached level", self.level, "!")
+            elif self.level = 3:
+                print("You have reach the FINAL BATTLE")
+                print("You now get the chance to level up your weapon")
+                #dit kan later een item shop worden
+                ##############
+                self.weapon_type = weapon_list[2]
+                y = input(int("Choose a number between 1 and 5"))
+                self.max_damage = self.item_level * y
+                
+                #wapen blijft het zelfde, maar krijgt nu de mogelijkheid om beter te worden
+            
+                
             self.print_stats()
     
     def equip_item(self, item):
@@ -71,27 +91,7 @@ class Player:
     
     def print_stats(self):
         print()
-        for stats in "iets":
-             print("###################################################################################", end="", flush=True)
-             print("#######", self.name, " stats: ######################################################", end="", flush=True)
-             print("###################################################################################", end="", flush=True)
-             print("Name: ", self.name, end="", flush=True)
-             print("Level: ", self.level, end="", flush=True)
-             print("HP: ", self.hp, "/", self.max_hp, end="", flush=True)
-             print("XP: ", self.xp, "/", self.next_level_xp, end="", flush=True)
-             print("-------------------------------------------", end="", flush=True)
-             self.weapon.print_stats()
-             self.armor.print_stats()
-             print("###########################################", end="", flush=True)
-            
-        
-        '''
-        for letter in "###################################################################################":
-            print(letter)
-            time.sleep(1)
-            
-        '''
-        '''
+     
         print("###################################################################################")
         print("#######", self.name, " stats: ######################################################")
         print("###################################################################################")
@@ -103,6 +103,5 @@ class Player:
         self.weapon.print_stats()
         self.armor.print_stats()
         print("###########################################")
-    
-
+        
 
