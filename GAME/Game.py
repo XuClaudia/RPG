@@ -12,7 +12,7 @@ input("[PRESS ENTER TO CONTINUE]")
 print("Welcome to the world of ...")
 print("Adventure Time Come on, grab your friends")
 time.sleep(1)
-print("W'll go to very distant lands")
+print("We'll go to very distant lands")
 time.sleep(1.5)
 print("With Jake the Dog and Finn the Human")
 time.sleep(2)
@@ -63,12 +63,6 @@ print("Your final stats are:")
 player.print_stats()
 print()
 print("Thanks for playing")
-
-
-
-
-
-
 
 
 
