@@ -137,7 +137,7 @@ class Battle:
             
             if player_action == "S":
                 self.player.print_stats()
-                input("Press enter to continue the fight")
+                input("[Press enter to continue the battle]")
                 
             elif player_action == "F":
                 self.player_attack()
@@ -183,4 +183,3 @@ class Battle:
                  
                 break
                 
-
