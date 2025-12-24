@@ -36,23 +36,16 @@ class Monster:
 class Zombie(Monster):                         #De zombie (monster) heeft als doel om de weapon damage van de speler te verlagen. 
     def __init__(self, level):
         Monster.__init__(self, level)
-        print("Whwuuuubuuu whwuuubuu BRAINS.") 
-        time.sleep(1)
-        print ("I will destroy your WEAPON")
-
         self.monster_type = "Zombie"
         self.hp = self.max_hp = self.level * 10
-        self.min_damage = self.weapon.min_damage - 1    # De weapon damage van de speler wordt met één verlaagd en zo dus ook verlaagd.
-        self.max_damage = self.weapon.max_damage // 2    #De weapon damage van de speler wordt gehalveerd en zo dus verlaagd.
+        #code is geplaatst naar Battle +- regel 111
+        #self.min_damage = self.weapon.min_damage - 1    # De weapon damage van de speler wordt met één verlaagd en zo dus ook verlaagd.
+        #self.max_damage = self.weapon.max_damage // 2    #De weapon damage van de speler wordt gehalveerd en zo dus verlaagd.
         self.xp_value = 100 + self.level * 25
         
 class Candy(Monster):
     def __init__(self, level):
-        Monster.__init__(self, level)
-        print("My taste may be sweet BUT")
-        time.sleep(0.5)
-        print("Too much of me will effect you.")  
-
+        Monster.__init__(self, level) 
         self.monster_type = "Candy"
         self.hp = self.max_hp = self.level * 5
         self.min_damage = self.level + 2
@@ -62,10 +55,6 @@ class Candy(Monster):
 class Vampire(Monster):                         
     def __init__(self, level):
         Monster.__init__(self, level)
-        print("Hello there!") 
-        time.sleep(1)
-        print("I smell the scent of your blood")
-        
         self.monster_type = "Vampire"
         self.hp = self.max_hp = self.level * 15
         self.min_damage = self.level + 1
@@ -75,7 +64,6 @@ class Vampire(Monster):
 class Jelly(Monster):
     def __init__(self, level):
         Monster.__init__(self, level)
-
         self.monster_type = "Jelly"
 
 
@@ -83,15 +71,13 @@ class Evil_eyes(Monster):
     def __init__(self, level):
         Monster.__init__(self, level)
 
-        self.monster_type = "Evil Eyes"
+        self.monster_type = "Evil_eyes"
 
 
-class Goo_Skulls(Monster):
+class Goo_skulls(Monster):
     def __init__(self, level):
-        Monster.__init__(self, level)
-        print("You will die just like ME MUHAHAHAHAHA")
-        
-        self.monster_type = "Goo Skulls"
+        Monster.__init__(self, level)   
+        self.monster_type = "Goo_skulls"
         self.hp = self.max_hp = self.level * 20
         self.min_damage = 1
         self.max_damage = self.level * 4
