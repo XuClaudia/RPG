@@ -1,26 +1,37 @@
 from Item import Item, Weapon, Armor
-from Monster import Monster, Vampire, Goo_Skulls
+from Monster import Monster, Zombie, Candy, Vampire, Jelly, Evil_eyes, Goo_skulls
 import random
+import time
 
 class Battle:
     def __init__(self, player):
-        self.player = player #link naar palyer
+        self.player = player #link naar player
         self.difficulty = random.randint(1,3) #naar aantal monsters
         self.monster_list = []
         self.xp_value = 0
-        monster_type = ["Vampire", "Goo_Skulls"]
+        monster_type = ["Zombie", "Candy", "Vampire", "Jelly", "Evil_eyes", "Goo_skulls"]
         
         for i in range(self.difficulty): #monsters maken
             monster_choice = random.choice(monster_type)
-            if monster_choice == "Vampire":
+            if monster_choice == "Zombie":
+                self.monster_list.append(Zombie(self.player.level))
+            elif monster_choice == "Candy":
+                self.monster_list.append(Candy(self.player.level))
+            elif monster_choice == "Vampire":
                 self.monster_list.append(Vampire(self.player.level))
-            elif monster_choice == "Goo_Skulls":
-                self.monster_list.append(Goo_Skulls(self.player.level))
+            elif monster_choice == "Jelly":
+                self.monster_list.append(Jelly(self.player.level))
+            elif monster_choice == "Evil_eyes":
+                self.monster_list.append(Evil_eyes(self.player.level))
+            elif monster_choice == "Goo_skulls":
+                self.monster_list.append(Goo_skulls(self.player.level))
+            
                 
             self.xp_value += self.monster_list[i].xp_value
             
     def battle_stats(self):
         print("You are fighting:")
+        print()
         
         for i in range(self.difficulty):
             print("Enemy", i + 1)
@@ -91,14 +102,46 @@ class Battle:
             max_target = len(self.monster_list)
             target = -1
             while target < 1 or target > max_target:
-                target = int(input("Which monster would you like to attack? ( 1 -" + str(max_target) + ")"))
+                target = int(input("Which monster would you like to attack? ( 1 - " + str(max_target) + ")"))
             target -= 1
         else:
             target = 0 #plek nul in de lijst monster 1
             
+        #Strijdkreetjes van de monsters
+        if self.monster_list[target] == Zombie(self.player.level):
+            print("Whwuuuubuuu whwuuubuu BRAINS.")
+            time.sleep(1)
+            print ("I will destroy your WEAPON")
+            self.weapon.min_damage - 1
+            self.weapon.max_damage // 2
+            self.weapon.print_stats()
+            
+        elif self.monster_list[target] == Candy(self.player.level):
+            print("My taste may be sweet BUT")
+            time.sleep(0.5)
+            print("Too much of me will effect you.")
+            
+        elif self.monster_list[target] == Vampire(self.player.level):
+            print("Hello there!") 
+            time.sleep(1)
+            print("I smell the scent of your blood")
+            
+        elif self.monster_list[target] == Jelly(self.player.level):
+            print("HIER KOMT NOG WAT")
+            
+        elif self.monster_list[target] == Evil_eyes(self.player.level):
+            print("HIER KOMT NOG WAT")
+            
+        elif self.monster_list[target] == Goo_skulls(self.player.level):
+             print("You will die just like ME MUHAHAHAHAHA")
+
+        
+            
+        
+        
         player_damage = self.player.attack()
-        if self.monster_list[target].hp > 0:
-            self.monster_list[target].take_hit(player_damage)
+        if self.monster_list[target].hp > 0: #als de monster nog leeft hp> 0 
+            self.monster_list[target].take_hit(player_damage) #krijgt monster damage van player
         else:
             print("You hit the dead monster, it is still dead...")
     
@@ -123,10 +166,11 @@ class Battle:
     
     def fight_battle(self): #game loop
         print("You are under attack")
+        time.sleep(1)
         
         while True:
             print()
-            print("####### BATTLE ROUND ##############################################################")
+            print("### BATTLE ROUND ##################################################################")
             print()
             self.battle_stats()
             
@@ -137,7 +181,7 @@ class Battle:
             
             if player_action == "S":
                 self.player.print_stats()
-                input("[Press enter to continue the battle]")
+                input("[PRESS ENTER TO CONTINUE THE BATTLE]")
                 
             elif player_action == "F":
                 self.player_attack()
@@ -156,7 +200,7 @@ class Battle:
                     
                     self.player.xp_gain(self.xp_value)
                     self.generate_loot()
-                    input("Press enter to continue")
+                    input("[PRESS ENTER TO CONTINUE]")
                     break
                 
             elif player_action == "H":
