@@ -3,21 +3,25 @@ import random
 import time
 from Player import Player
 from Item import Item, Weapon, Armor
-from Monster import Zombie, Vampire, Goo_Skulls
+from Monster import Monster, Zombie, Candy, Vampire, Jelly, Evil_eyes, Goo_skulls
 from Battle import Battle
-
+def text_effect(text):
+    for letter in text:
+        print(letter, end="")
+        time.sleep(0.05)
 #welcome screen
 print("Hey! Hello there!")
 input("[PRESS ENTER TO CONTINUE]")
-print("Welcome to the world of ...")
-print("Adventure Time Come on, grab your friends")
+print()
+print("~~  Adventure Time Come on, grab your friends")
 time.sleep(1)
-print("We'll go to very distant lands")
+print("~~  We'll go to very distant lands")
 time.sleep(1.5)
-print("With Jake the Dog and Finn the Human")
+print("~~  With Jake the Dog and Finn the Human")
 time.sleep(2)
-print("The fun will never end, it's Adventure Time")
+print("~~  The fun will never end, it's Adventure Time")
 time.sleep(1.5)
+print()
 input("[PRESS ENTER TO CONTINUE]")
 print()
 
@@ -38,11 +42,12 @@ elif player_name == "C" or player_name == "Three trunks":
 #player = Player(player_name)
     
 print()
-print("Hi", player.name, ", you are entering the world of adventure time....")
-for letter in "BEAWARE!!":
-            print(letter)
+text_effect("Hi " + player.name + ", you are entering a world full of adventure....\n")
+for letter in "BE AWARE!!":
+            print(letter, end=" ")
             time.sleep(0.25)
             
+print()         
 input("[PRESS ENTER TO CONTINUE]")
 
 
@@ -53,7 +58,7 @@ while player.hp > 0:
     print("-----")
     print()
     battle_count += 1
-    print("Battle", battle_count)
+    print("{BATTLE", battle_count, "}")
     battle = Battle(player)
     battle.fight_battle() #start
     
