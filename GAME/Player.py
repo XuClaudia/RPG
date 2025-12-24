@@ -2,6 +2,11 @@ from Item import Item, Weapon, Armor
 import random
 import time
 
+def text_effect(text):
+    for letter in text:
+        print(letter, end="")
+        time.sleep(0.01)
+
 class Player:
     level = 1
     xp = 0
@@ -57,15 +62,15 @@ class Player:
             self.max_hp = int(self.max_hp * 1.2)
             self.hp = self.max_hp
            
-            if self.level = 1:
+            if self.level == 1:
                 #wordt level 2
                 self.weapon_type = weapon_list[1]
                 print("YAYYY! You have reached level", self.level, "!")
-            elif self.level = 2:
+            elif self.level == 2:
                 #wordt level 3
                 self.weapon_type = weapon_list[2]
                 print("YAYYY! You have reached level", self.level, "!")
-            elif self.level = 3:
+            elif self.level == 3:
                 print("You have reach the FINAL BATTLE")
                 print("You now get the chance to level up your weapon")
                 #dit kan later een item shop worden
@@ -91,17 +96,21 @@ class Player:
     
     def print_stats(self):
         print()
-     
+        
         print("###################################################################################")
-        print("#######", self.name, " stats: ######################################################")
+        print("#######" + self.name + " stats: ######################################################")
         print("###################################################################################")
-        print("Name: ", self.name)
-        print("Level: ", self.level)
-        print("HP: ", self.hp, "/", self.max_hp)
-        print("XP: ", self.xp, "/", self.next_level_xp)
-        print("-------------------------------------------")
+        text_effect("  Name: " + self.name + "\n")
+        text_effect("  Level: " + str(self.level) + "\n")
+        text_effect("  HP: " + str(self.hp) + "/" + str(self.max_hp) + "\n")
+        text_effect("  XP: " + str(self.xp) + "/" + str(self.next_level_xp) + "\n")
+        print("-----------------------------------------------------------------------------------\n")
         self.weapon.print_stats()
         self.armor.print_stats()
-        print("###########################################")
+        print("###########################################\n")
+
         
+        
+        
+            
 
