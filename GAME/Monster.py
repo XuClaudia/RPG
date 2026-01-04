@@ -1,3 +1,4 @@
+#let op toegevoegde gold_value
 import random, time
 class Monster:
     hp = 1
@@ -6,6 +7,7 @@ class Monster:
     max_damage = 1
     monster_type = None
     xp_value = 1
+    gold_value = 1
     
     def __init__(self, level):
         self.level = level
@@ -42,6 +44,7 @@ class Zombie(Monster):                         #De zombie (monster) heeft als do
         #self.min_damage = self.weapon.min_damage - 1    # De weapon damage van de speler wordt met één verlaagd en zo dus ook verlaagd.
         #self.max_damage = self.weapon.max_damage // 2    #De weapon damage van de speler wordt gehalveerd en zo dus verlaagd.
         self.xp_value = 100 + self.level * 25
+        self.gold_value = 5 + self.level * 50
         
 class Candy(Monster):
     def __init__(self, level):
@@ -50,8 +53,9 @@ class Candy(Monster):
         self.hp = self.max_hp = self.level * 5
         self.min_damage = self.level + 2
         self.max_damage = self.level + 4
-
-
+        self.xp_value = 100 + self.level * 25
+        self.gold_value = 5 + self.level * 50
+        
 class Vampire(Monster):                         
     def __init__(self, level):
         Monster.__init__(self, level)
@@ -60,6 +64,7 @@ class Vampire(Monster):
         self.min_damage = self.level + 1
         self.max_damage = self.level * 3
         self.xp_value = 100 + self.level * 20
+        self.gold_value = 5 + self.level * 50
 
 class Jelly(Monster):
     def __init__(self, level):
@@ -82,6 +87,7 @@ class Goo_skulls(Monster):
         self.min_damage = 1
         self.max_damage = self.level * 4
         self.xp_value = 100 + self.level * 20
+        self.gold_value = 5 + self.level * 50
         self.crit_chance = max(30, level * 10)
         
     def attack(self):
