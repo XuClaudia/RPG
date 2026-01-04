@@ -1,14 +1,26 @@
+##regel 113
+
 from Item import Item, Weapon, Armor
 from Monster import Monster, Zombie, Candy, Vampire, Jelly, Evil_eyes, Goo_skulls
+from Shop import Shop
+from Player import Player
+import Ascii
 import random
 import time
 
+
+def text_effect(text):
+    for letter in text:
+        print(letter, end="")
+        time.sleep(0.01)
+        
 class Battle:
     def __init__(self, player):
         self.player = player #link naar player
         self.difficulty = random.randint(1,3) #naar aantal monsters
         self.monster_list = []
         self.xp_value = 0
+        self.gold_value = 0
         monster_type = ["Zombie", "Candy", "Vampire", "Jelly", "Evil_eyes", "Goo_skulls"]
         
         for i in range(self.difficulty): #monsters maken
@@ -28,7 +40,8 @@ class Battle:
             
                 
             self.xp_value += self.monster_list[i].xp_value
-            
+            self.gold_value += self.monster_list[i].gold_value
+        
     def battle_stats(self):
         print("You are fighting:")
         print()
@@ -38,7 +51,7 @@ class Battle:
             self.monster_list[i].print_stats()
             print()
             
-        print("###################################################################################")
+        print("\n" + "-"*75)
         print()
 
     def generate_loot(self): #new armor? buit
@@ -107,38 +120,39 @@ class Battle:
         else:
             target = 0 #plek nul in de lijst monster 1
             
+        monster = self.monster_list[target]
+            
         #Strijdkreetjes van de monsters
-        if self.monster_list[target] == Zombie(self.player.level):
+        if isinstance (monster, Zombie):
             print("Whwuuuubuuu whwuuubuu BRAINS.")
             time.sleep(1)
             print ("I will destroy your WEAPON")
-            self.weapon.min_damage - 1
-            self.weapon.max_damage // 2
-            self.weapon.print_stats()
+            self.player.weapon.print_stats()
+            print("--->")
+            self.player.weapon.min_damage -= 1
+            self.player.weapon.max_damage // 2
+            self.player.weapon.print_stats()
+            time.sleep(2)
             
-        elif self.monster_list[target] == Candy(self.player.level):
-            print("My taste may be sweet BUT")
+        elif isinstance (monster, Candy):
+            text_effect("My taste may be sweet BUT")
             time.sleep(0.5)
-            print("Too much of me will effect you.")
+            text_effect("Too much of me will effect you.")
             
-        elif self.monster_list[target] == Vampire(self.player.level):
-            print("Hello there!") 
+        elif isinstance (monster, Vampire):
+            text_effect("Hello there!") 
             time.sleep(1)
-            print("I smell the scent of your blood")
+            text_effect("I smell the scent of your blood")
             
-        elif self.monster_list[target] == Jelly(self.player.level):
-            print("HIER KOMT NOG WAT")
+        elif isinstance (monster, Jelly):
+            text_effect("HIER KOMT NOG WAT")
             
-        elif self.monster_list[target] == Evil_eyes(self.player.level):
-            print("HIER KOMT NOG WAT")
+        elif isinstance (monster, Evil_eyes):
+            text_effect("HIER KOMT NOG WAT")
             
-        elif self.monster_list[target] == Goo_skulls(self.player.level):
-             print("You will die just like ME MUHAHAHAHAHA")
+        elif isinstance (monster, Goo_skulls):
+            text_effect("You will die just like ME MUHAHAHAHAHA")
 
-        
-            
-        
-        
         player_damage = self.player.attack()
         if self.monster_list[target].hp > 0: #als de monster nog leeft hp> 0 
             self.monster_list[target].take_hit(player_damage) #krijgt monster damage van player
@@ -170,13 +184,13 @@ class Battle:
         
         while True:
             print()
-            print("### BATTLE ROUND ##################################################################")
-            print()
+            Ascii.display_art("Battle round")
+            #print("\n" + "###" + " BATTLE ROUND " + "#"*60)
             self.battle_stats()
             
             player_action = " "
-            while player_action not in ["S","F","H","R", "Q"]:
-                player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, (Q)uit").upper()
+            while player_action not in ["S","F","H","R", "B","Q"]:
+                player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, (B)uy_items, (Q)uit\n").upper()
                 print()
             
             if player_action == "S":
@@ -194,9 +208,11 @@ class Battle:
                     self.monster_attack()
                     
                 else:
-                    print("###########################################################################################################")
+                    print()
+                    print("\n" + "#"*82)
                     print("####### You won ###########################################################################################")
-                    print("###########################################################################################################")
+                    print("\n" + "###" + " You won " +"#"*70)
+                    print("\n" + "#"*82)
                     
                     self.player.xp_gain(self.xp_value)
                     self.generate_loot()
@@ -214,16 +230,20 @@ class Battle:
                 else:
                     self.monster_attack()
                     
+            elif player_action == "B":
+                shop = Shop(self.player)
+                shop.shop_loop()
+                    
             elif player_action == "Q":
                 self.player_quit()
                 break
             
             if self.player.hp <= 0:
-                print("############################")
-                print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                print("!!!!!!!!!!!You are dead!!!!!!!!!!!!!!!!!!!!!!")
-                print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                print("############################")
+                print("\n" + "#"*82)
+                print("\n" + "!"*82)
+                print("\n" + "!!!" + " You are dead " +"!"*65)
+                print("\n" + "!"*82)
+                print("\n" + "#"*82)
                  
                 break
                 
