@@ -13,17 +13,24 @@ class Player:
     next_level_xp = 500
     hp = 50
     max_hp = 50
+    gold = 10
     
     def __init__(self, name):
         self.name = name
         self.weapon = Weapon (1, name)
         self.armor = Armor (1)
+        self.has_grenade = False
 
 
     
     def attack(self):
         damage = self.level + random.randint(self.weapon.min_damage, self.weapon.max_damage)
-        print(self.name, "attacks with a", self.weapon.weapon_type, "for", damage, "damage")
+        if self.has_grenade:
+            damage += 20
+            self.has_grenade = False
+            print(f"💥 {self.name} throws a GRENADE for {damage} damage!")
+        else:
+            print(self.name, "attacks with a", self.weapon.weapon_type, "for", damage, "damage")
         return damage
     
         
@@ -33,13 +40,16 @@ class Player:
             self.hp -= final_damage
             if self.hp <= 0:
                 print("AAAAAAAAAAAAAAa! You died!")
+                time.sleep(1)
             else:
                 print("ouch! You take", final_damage, "damage!")
                 print("You have", self.hp, "hitpoints left!")
+                time.sleep(1)
     
         else:
             #geen damage/ afgeweerd
             print("Your shiny armor protects you: You take no damage!")
+            time.sleep(1)
             
     def heal(self, heal_amount):
         self.hp += heal_amount
@@ -83,7 +93,12 @@ class Player:
             
                 
             self.print_stats()
-    
+            
+    def gold_gain(self, gold_amount):
+        self.gold += gold_amount
+        print("You have gained ", gold_amount, "gold!.")
+        
+        
     def equip_item(self, item):
         if item.item_type == "weapon":
             self.weapon = item
@@ -100,17 +115,18 @@ class Player:
         print("###################################################################################")
         print("#######" + self.name + " stats: ######################################################")
         print("###################################################################################")
-        text_effect("  Name: " + self.name + "\n")
-        text_effect("  Level: " + str(self.level) + "\n")
-        text_effect("  HP: " + str(self.hp) + "/" + str(self.max_hp) + "\n")
-        text_effect("  XP: " + str(self.xp) + "/" + str(self.next_level_xp) + "\n")
+        print("  Name: " + self.name + "\n")
+        print("  Level: " + str(self.level) + "\n")
+        print("  HP: " + str(self.hp) + "/" + str(self.max_hp) + "\n")
+        print("  XP: " + str(self.xp) + "/" + str(self.next_level_xp) + "\n")
         print("-----------------------------------------------------------------------------------\n")
         self.weapon.print_stats()
         self.armor.print_stats()
         print("###########################################\n")
 
-        
+
         
         
             
+
 
