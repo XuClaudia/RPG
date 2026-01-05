@@ -35,16 +35,16 @@ class Monster:
 # Wapens voor type 1: a. Snowball b. Iceicle c. gunter(dingen gooien) Type 2: a. Pocket knife b. Finn's sword c. Katana Type: 3: a. spoon b. Rock c. Apple pie
 # Monsters die tegenkomt: A. Zombie B. Candy C. vampire D. Jelly Cube E. Evil Eyes F. Goo skulls
 
-class Zombie(Monster):                         #De zombie (monster) heeft als doel om de weapon damage van de speler te verlagen. 
+class Zombie(Monster):
     def __init__(self, level):
-        Monster.__init__(self, level)
+        super().__init__(level)
         self.monster_type = "Zombie"
-        self.hp = self.max_hp = self.level * 10
-        #code is geplaatst naar Battle +- regel 111
-        #self.min_damage = self.weapon.min_damage - 1    # De weapon damage van de speler wordt met één verlaagd en zo dus ook verlaagd.
-        #self.max_damage = self.weapon.max_damage // 2    #De weapon damage van de speler wordt gehalveerd en zo dus verlaagd.
-        self.xp_value = 100 + self.level * 25
-        self.gold_value = 5 + self.level * 50
+        self.hp = self.max_hp = level * 10
+        self.min_damage = 1
+        self.max_damage = 3
+        self.xp_value = 100 + level * 25
+        self.gold_value = 5 + level * 50
+
         
 class Candy(Monster):                     #De candy(monster) zorgt ervoor dat de speler een kans heeft om niet meer aan te vallen bij een ronde. 
     def __init__(self, level):
@@ -55,8 +55,10 @@ class Candy(Monster):                     #De candy(monster) zorgt ervoor dat de
         self.max_damage = self.level + 4
         self.xp_value = 100 + self.level * 25
         self.gold_value = 5 + self.level * 50
-    
+        
     def sugar_effect(self, player):
+        if player.skip_attack:
+            return  # Zodat als er meer dan 1 candy is, wordt de speler niet steeds geblokkeerd.
         if random.randint(1, 100) <= 50:
             player.skip_attack = True
             print("🍬 You feel dizzy from the sugar rush!")
