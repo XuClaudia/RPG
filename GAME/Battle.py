@@ -107,10 +107,18 @@ class Battle:
             if monster.hp > 0:
                 monster_damage = monster.attack()
                 self.player.take_hit(monster_damage)
+                
+                if isinstance(monster, Candy):
+                    monster.sugar_effect(self.player)
     
     def player_attack(self):
         #monsters zijn genummerd
         #speler valt die aan
+        if self.player.skip_attack:
+            print("🍬 You are too dizzy to attack this round!")
+            self.player.skip_attack = False
+            return
+        
         if len(self.monster_list)> 1: #aantal monsters
             max_target = len(self.monster_list)
             target = -1
@@ -129,7 +137,7 @@ class Battle:
             print ("I will destroy your WEAPON\n")
             self.player.weapon.print_stats()
             print("--->")
-            self.player.weapon.min_damage -= 1
+            self.player.weapon.min_damage -= 1   #Mag niet kleiner zijn dan nul!
             self.player.weapon.max_damage // 2
             self.player.weapon.print_stats()
             time.sleep(2)
@@ -210,7 +218,6 @@ class Battle:
                 else:
                     print()
                     print("\n" + "#"*82)
-                    print("####### You won ###########################################################################################")
                     print("\n" + "###" + " You won " +"#"*70)
                     print("\n" + "#"*82)
                     
@@ -247,4 +254,5 @@ class Battle:
                  
                 break
                 
+
 
