@@ -46,7 +46,7 @@ class Zombie(Monster):                         #De zombie (monster) heeft als do
         self.xp_value = 100 + self.level * 25
         self.gold_value = 5 + self.level * 50
         
-class Candy(Monster):
+class Candy(Monster):                     #De candy(monster) zorgt ervoor dat de speler een kans heeft om niet meer aan te vallen bij een ronde. 
     def __init__(self, level):
         Monster.__init__(self, level) 
         self.monster_type = "Candy"
@@ -55,6 +55,8 @@ class Candy(Monster):
         self.max_damage = self.level + 4
         self.xp_value = 100 + self.level * 25
         self.gold_value = 5 + self.level * 50
+
+
         
 class Vampire(Monster):                         
     def __init__(self, level):
@@ -99,3 +101,4 @@ class Goo_skulls(Monster):
             
         print(self.monster_type, "attacks for", damage, "damage")
         return damage
+
