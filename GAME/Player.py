@@ -119,7 +119,3 @@ class Player:
         self.weapon.print_stats()
         self.armor.print_stats()
         print("###########################################\n")
-
-
-        
-        
