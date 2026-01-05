@@ -50,13 +50,17 @@ class Candy(Monster):                     #De candy(monster) zorgt ervoor dat de
     def __init__(self, level):
         Monster.__init__(self, level) 
         self.monster_type = "Candy"
-        self.hp = self.max_hp = self.level * 5
+        self.hp = self.max_hp = self.level * 25
         self.min_damage = self.level + 2
         self.max_damage = self.level + 4
         self.xp_value = 100 + self.level * 25
         self.gold_value = 5 + self.level * 50
-
-
+    
+    def sugar_effect(self, player):
+        if random.randint(1, 100) <= 50:
+            player.skip_attack = True
+            print("🍬 You feel dizzy from the sugar rush!")
+            print("🍬 You will miss your next attack!")
         
 class Vampire(Monster):                         
     def __init__(self, level):
@@ -101,4 +105,5 @@ class Goo_skulls(Monster):
             
         print(self.monster_type, "attacks for", damage, "damage")
         return damage
+
 
