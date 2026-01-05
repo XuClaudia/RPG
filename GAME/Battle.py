@@ -98,18 +98,32 @@ class Battle:
         else:
             #geen buit gevonden
             print("You found no equip")
-            
-            
-            
+             
             
     def monster_attack(self):
         for monster in self.monster_list:
             if monster.hp > 0:
-                monster_damage = monster.attack()
-                self.player.take_hit(monster_damage)
-                
-                if isinstance(monster, Candy):
-                    monster.sugar_effect(self.player)
+            # Zombie effect: weapon verzwakken
+                if isinstance(monster, Zombie):
+                    print("Whwuuuubuuu whwuuubuu BRAINS.\nI will destroy your WEAPON!")
+                    print("Before:", self.player.weapon.min_damage, "-", self.player.weapon.max_damage)
+                    
+                    # Verlaag weapon damage
+                    self.player.weapon.min_damage = max(1, self.player.weapon.min_damage - 1)
+                    self.player.weapon.max_damage = max(
+                        self.player.weapon.min_damage,
+                        self.player.weapon.max_damage // 2
+                    )
+
+                    print("After:", self.player.weapon.min_damage, "-", self.player.weapon.max_damage)
+                    print()
+            
+            # Gewone damage van de zombie (of andere monsters)
+            monster_damage = monster.attack()
+            self.player.take_hit(monster_damage)
+       #Als het een Candy is, voer sugar effect uit     
+            if isinstance(monster, Candy):
+                monster.sugar_effect(self.player)
     
     def player_attack(self):
         #monsters zijn genummerd
@@ -134,13 +148,15 @@ class Battle:
         if isinstance (monster, Zombie):
             print("Whwuuuubuuu whwuuubuu BRAINS.\n")
             time.sleep(1)
-            print ("I will destroy your WEAPON\n")
+            print("I will destroy your WEAPON\n")
+
             self.player.weapon.print_stats()
             print("--->")
-            self.player.weapon.min_damage -= 1   #Mag niet kleiner zijn dan nul!
-            self.player.weapon.max_damage // 2
-            self.player.weapon.print_stats()
-            time.sleep(2)
+           # original_max = self.player.weapon.max_damage
+            #self.player.weapon.min_damage = max(1, self.player.weapon.min_damage - 1)
+            #self.player.weapon.max_damage = max(self.player.weapon.min_damage, int(original_max * 0.75))
+            #self.player.weapon.print_stats()
+            #time.sleep(2)
             
         elif isinstance (monster, Candy):
             text_effect("My taste may be sweet BUT\n")
@@ -191,6 +207,7 @@ class Battle:
         time.sleep(1)
         
         while True:
+            self.player.skip_attack = False  #Zodat als er meer dan 1 candy is, wordt de speler niet steeds geblokkeerd.
             print()
             Ascii.display_art("Battle round")
             #print("\n" + "###" + " BATTLE ROUND " + "#"*60)
@@ -254,3 +271,6 @@ class Battle:
                  
                 break
                 
+
+
+
