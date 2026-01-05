@@ -254,5 +254,3 @@ class Battle:
                  
                 break
                 
-
-
