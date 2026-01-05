@@ -124,9 +124,9 @@ class Battle:
             
         #Strijdkreetjes van de monsters
         if isinstance (monster, Zombie):
-            print("Whwuuuubuuu whwuuubuu BRAINS.")
+            print("Whwuuuubuuu whwuuubuu BRAINS.\n")
             time.sleep(1)
-            print ("I will destroy your WEAPON")
+            print ("I will destroy your WEAPON\n")
             self.player.weapon.print_stats()
             print("--->")
             self.player.weapon.min_damage -= 1
@@ -135,29 +135,29 @@ class Battle:
             time.sleep(2)
             
         elif isinstance (monster, Candy):
-            text_effect("My taste may be sweet BUT")
+            text_effect("My taste may be sweet BUT\n")
             time.sleep(0.5)
-            text_effect("Too much of me will effect you.")
+            text_effect("Too much of me will effect you.\n")
             
         elif isinstance (monster, Vampire):
-            text_effect("Hello there!") 
+            text_effect("Hello there!\n") 
             time.sleep(1)
-            text_effect("I smell the scent of your blood")
+            text_effect("I smell the scent of your blood\n")
             
         elif isinstance (monster, Jelly):
-            text_effect("HIER KOMT NOG WAT")
+            text_effect("HIER KOMT NOG WAT\n")
             
         elif isinstance (monster, Evil_eyes):
-            text_effect("HIER KOMT NOG WAT")
+            text_effect("HIER KOMT NOG WAT\n")
             
         elif isinstance (monster, Goo_skulls):
-            text_effect("You will die just like ME MUHAHAHAHAHA")
+            text_effect("You will die just like ME MUHAHAHAHAHA\n")
 
         player_damage = self.player.attack()
         if self.monster_list[target].hp > 0: #als de monster nog leeft hp> 0 
             self.monster_list[target].take_hit(player_damage) #krijgt monster damage van player
         else:
-            print("You hit the dead monster, it is still dead...")
+            print("You hit the dead monster, it is still dead...\n")
     
     def player_heal(self):
         if random.randint(1,100) <= 40:
@@ -247,3 +247,4 @@ class Battle:
                  
                 break
                 
+
