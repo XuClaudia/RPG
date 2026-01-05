@@ -20,6 +20,7 @@ class Player:
         self.weapon = Weapon (1, name)
         self.armor = Armor (1)
         self.has_grenade = False
+        self.skip_attack = False
 
 
     
@@ -128,5 +129,6 @@ class Player:
         
         
             
+
 
 
