@@ -20,7 +20,6 @@ class Player:
         self.weapon = Weapon (1, name)
         self.armor = Armor (1)
         self.has_grenade = False
-        self.skip_attack = False
 
 
     
@@ -111,16 +110,12 @@ class Player:
     
     
     def print_stats(self):
-        print()
-        
-        print("###################################################################################")
-        print("#######" + self.name + " stats: ######################################################")
-        print("###################################################################################")
         print("  Name: " + self.name + "\n")
         print("  Level: " + str(self.level) + "\n")
         print("  HP: " + str(self.hp) + "/" + str(self.max_hp) + "\n")
         print("  XP: " + str(self.xp) + "/" + str(self.next_level_xp) + "\n")
-        print("-----------------------------------------------------------------------------------\n")
+        print("  Gold: " + str(self.gold) + "\n")
+        print("-"*70 + "\n")
         self.weapon.print_stats()
         self.armor.print_stats()
         print("###########################################\n")
