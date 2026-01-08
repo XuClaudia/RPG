@@ -37,7 +37,7 @@ character_specific_items = {
              setattr(player.weapon, 'max_damage', player.weapon.max_damage + 5),
              print("✨ Sword polished! Damage:" + player.weapon.min_damage + " - " + player.weapon.max_damage))
         },
-        {"name": "Dragon_sword",
+        {"name": "Dragon🐉_sword",
          "cost": 157,
          "type": "Weapon",
          "description": "Legendary sword",
@@ -154,3 +154,4 @@ class Shop:
             else:
                 print("Please enter a  number or '123' o leave")
                 
+
