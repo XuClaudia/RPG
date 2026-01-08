@@ -37,10 +37,13 @@ class Weapon(Item):
         self.set_damage()
        
     def set_damage(self):
-        ### ik geef nu aan alle wapens op plek 1 dezelfde damage
         if self.weapon_type == self.weapon_list[0]:
             self.min_damage = self.item_level * 2
             self.max_damage = self.item_level * 3
+
+        elif self.weapon_type == "Pocket_knife":
+            self.min_damage=  self.item_level * 3 + 2
+            self.max_damage = self.item_level * 4 + 1
         
         elif self.weapon_type == self.weapon_list[1]:
             self.min_damage=  self.item_level * 3
@@ -87,4 +90,5 @@ class Armor(Item):
         Item.print_stats(self)
         print(self.armor_type + "_defence:" + str(self.defence) + "\n")
         
+
 
