@@ -28,7 +28,7 @@ class Weapon(Item):
         elif player_name == "Finn" :
             weapon_list = ["Pocket_knife", "Sword", "Katana"]
         elif player_name == "Ice king":
-            weapon_list = ["Snowball", "icicle", "Gunter"]
+            weapon_list = ["Snowball", "Icicle", "Gunter"]
         elif player_name == "Tree trunks" :
             weapon_list = ["Spoon", "Rock", "Applepie"]
 
@@ -37,25 +37,45 @@ class Weapon(Item):
         self.set_damage()
        
     def set_damage(self):
-        if self.weapon_type == self.weapon_list[0]:
-            self.min_damage = self.item_level * 2
+        if self.weapon_type == "Pocket_knife":
+            self.min_damage = self.item_level * 2 
+            self.max_damage = self.item_level * 3 
+
+        elif self.weapon_type == "Sword":
+            self.min_damage=  self.item_level * 3 
+            self.max_damage = self.item_level * 4 + 2
+        
+        elif self.weapon_type == "Katana":
+            self.min_damage=  self.item_level * 4
+            self.max_damage = self.item_level * 5 + 3
+
+        elif self.weapon_type == "Snowball":
+            self.min_damage =  self.item_level * 2
             self.max_damage = self.item_level * 3
 
-        elif self.weapon_type == "Pocket_knife":
-            self.min_damage=  self.item_level * 3 + 2
-            self.max_damage = self.item_level * 4 + 1
-        
-        elif self.weapon_type == self.weapon_list[1]:
-            self.min_damage=  self.item_level * 3
-            self.max_damage = self.item_level * 4
+        elif self.weapon_type == "Icicle":
+            self.min_damage =  self.item_level * 2 + 1
+            self.max_damage = self.item_level * 3 + 2
 
-        elif self.weapon_type == self.weapon_list[2]:
-            self.min_damage =  self.item_level * 4
-            self.max_damage = self.item_level * 5
+        elif self.weapon_type == "Gunter":
+            self.min_damage =  self.item_level * 2 + 3
+            self.max_damage = self.item_level * 3 + 6
+
+        elif self.weapon_type == "Spoon":
+            self.min_damage =  self.item_level * 2
+            self.max_damage = self.item_level * 3 + 1
+
+        elif self.weapon_type == "Rock":
+            self.min_damage =  self.item_level * 2 + 2
+            self.max_damage = self.item_level * 3 + 5
+
+        elif self.weapon_type == "Applepie":
+            self.min_damage =  self.item_level * 2 + 4
+            self.max_damage = self.item_level * 3 + 9
             
         elif self.weapon_type == "Dragon_sword": #shop
-            self.min_damage =  self.item_level * 6
-            self.max_damage = self.item_level * 8
+            self.min_damage =  self.item_level * 7
+            self.max_damage = self.item_level * 8 + 5
             
         elif self.weapon_type == "Fork": #shop
             self.min_damage =  self.item_level * 5
@@ -90,5 +110,6 @@ class Armor(Item):
         Item.print_stats(self)
         print(self.armor_type + "_defence:" + str(self.defence) + "\n")
         
+
 
 
