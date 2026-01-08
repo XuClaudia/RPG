@@ -102,21 +102,22 @@ class Battle:
             
     def monster_attack(self):
         for monster in self.monster_list:
-            if monster.hp > 0:
+            if monster.hp <= 0:
+                continue
             # Zombie effect: weapon verzwakken
-                if isinstance(monster, Zombie):
-                    print("Whwuuuubuuu whwuuubuu BRAINS.\nI will destroy your WEAPON!")
-                    print("Before:", self.player.weapon.min_damage, "-", self.player.weapon.max_damage)
+            if isinstance(monster, Zombie):     #van hier tot r. 126 (monster.sugar_effect(self.player)) is gemaakt m.b.v. AI\
+                print("Whwuuuubuuu whwuuubuu BRAINS.\nI will destroy your WEAPON!")
+                print("Before:", self.player.weapon.min_damage, "-", self.player.weapon.max_damage)
                     
-                    # Verlaag weapon damage
-                    self.player.weapon.min_damage = max(1, self.player.weapon.min_damage - 1)
-                    self.player.weapon.max_damage = max(
-                        self.player.weapon.min_damage,
-                        self.player.weapon.max_damage // 2
-                    )
+                 # Verlaag weapon damage
+                self.player.weapon.min_damage = max(1, self.player.weapon.min_damage - 1)
+                self.player.weapon.max_damage = max(
+                     self.player.weapon.min_damage,
+                    self.player.weapon.max_damage // 2
+                )
 
-                    print("After:", self.player.weapon.min_damage, "-", self.player.weapon.max_damage)
-                    print()
+                print("After:", self.player.weapon.min_damage, "-", self.player.weapon.max_damage)
+                print()
             
             # Gewone damage van de zombie (of andere monsters)
             monster_damage = monster.attack()
@@ -146,12 +147,12 @@ class Battle:
             
         #Strijdkreetjes van de monsters
         if isinstance (monster, Zombie):
-            print("Whwuuuubuuu whwuuubuu BRAINS.\n")
-            time.sleep(1)
-            print("I will destroy your WEAPON\n")
+           # print("Whwuuuubuuu whwuuubuu BRAINS.\n")
+           # time.sleep(1)
+           # print("I will destroy your WEAPON\n")
 
             self.player.weapon.print_stats()
-            print("--->")
+           # print("--->")
            # original_max = self.player.weapon.max_damage
             #self.player.weapon.min_damage = max(1, self.player.weapon.min_damage - 1)
             #self.player.weapon.max_damage = max(self.player.weapon.min_damage, int(original_max * 0.75))
@@ -169,8 +170,8 @@ class Battle:
             text_effect("I smell the scent of your blood\n")
             
         elif isinstance (monster, Jelly):
-            text_effect("HIER KOMT NOG WAT\n")
-            
+            text_effect("The Jelly starts wobbling uncontrollably...\n")
+                
         elif isinstance (monster, Evil_eyes):
             text_effect("HIER KOMT NOG WAT\n")
             
@@ -179,7 +180,13 @@ class Battle:
 
         player_damage = self.player.attack()
         if self.monster_list[target].hp > 0: #als de monster nog leeft hp> 0 
-            self.monster_list[target].take_hit(player_damage) #krijgt monster damage van player
+#             self.monster_list[target].take_hit(player_damage) #krijgt monster damage van player
+            
+            if isinstance(monster, Jelly):
+                monster.take_hit(player_damage, self.player)
+            else:
+                monster.take_hit(player_damage)
+                
         else:
             print("You hit the dead monster, it is still dead...\n")
     
@@ -271,6 +278,4 @@ class Battle:
                  
                 break
                 
-
-
 
