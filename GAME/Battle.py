@@ -4,6 +4,7 @@ from Item import Item, Weapon, Armor
 from Monster import Monster, Zombie, Candy, Vampire, Jelly, Evil_eyes, Goo_skulls
 from Shop import Shop
 from Player import Player
+from SaveGame import save_game
 import Ascii
 import random
 import time
@@ -122,9 +123,14 @@ class Battle:
             # Gewone damage van de zombie (of andere monsters)
             monster_damage = monster.attack()
             self.player.take_hit(monster_damage)
+            
        #Als het een Candy is, voer sugar effect uit     
             if isinstance(monster, Candy):
                 monster.sugar_effect(self.player)
+            
+       #Als het een evil_eyes is dan voert die zijn effect uit.     
+            if isinstance(monster, Evil_eyes):
+                monster.verzwak_armor(self.player)
     
     def player_attack(self):
         #monsters zijn genummerd
@@ -172,9 +178,11 @@ class Battle:
         elif isinstance (monster, Jelly):
             text_effect("The Jelly starts wobbling uncontrollably...\n")
                 
-        elif isinstance (monster, Evil_eyes):
-            text_effect("HIER KOMT NOG WAT\n")
-            
+        elif isinstance(monster, Evil_eyes):
+            text_effect("The Evil Eyes lock onto you...\n")
+            time.sleep(0.6)
+            text_effect("They see every weakness in your armor.\n")
+   
         elif isinstance (monster, Goo_skulls):
             text_effect("You will die just like ME MUHAHAHAHAHA\n")
 
@@ -221,8 +229,8 @@ class Battle:
             self.battle_stats()
             
             player_action = " "
-            while player_action not in ["S","F","H","R", "B","Q"]:
-                player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, (B)uy_items, (Q)uit\n").upper()
+            while player_action not in ["S","F","H","R", "B", "V", "Q"]:
+                player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, (B)uy_items, sa(V)e, (Q)uit\n").upper()
                 print()
             
             if player_action == "S":
@@ -264,6 +272,9 @@ class Battle:
             elif player_action == "B":
                 shop = Shop(self.player)
                 shop.shop_loop()
+                
+            elif player_action == "V":
+                save_game(self.player)    
                     
             elif player_action == "Q":
                 self.player_quit()
