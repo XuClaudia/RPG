@@ -108,12 +108,27 @@ class Evil_eyes(Monster):
     def __init__(self, level):
         Monster.__init__(self, level)
         self.monster_type = "Evil_eyes"
-        self.hp = self.max_hp = self.level * 17
+        self.hp = self.max_hp = self.level * 13
         self.min_damage = self.level + 1
         self.max_damage = self.level * 3
         self.xp_value = 100 + self.level * 20
-        self.gold_value = 5 + self.level * 50       
+        self.gold_value = 5 + self.level * 50
+        
+    def verzwak_armor(self, player):
+        if player.armor.defence <= 0:
+            print("👁️ Your armor is already completely broken!")
+            return
 
+        if random.randint(1, 100) <= 60:
+            print("👁️ The Evil Eyes stare into your soul...")
+            print("🛡️ Your armor is CURSED!")
+            print(" Your armor defence before:", player.armor.defence)
+
+            player.armor.defence = max(0, player.armor.defence - 2)
+
+            print("Your armor defence after Evil Eyes ATTACKKK:", player.armor.defence)
+            print()
+            
 class Goo_skulls(Monster):
     def __init__(self, level):
         Monster.__init__(self, level)   
