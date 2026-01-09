@@ -4,6 +4,7 @@ from Player import Player
 from Item import Item, Weapon, Armor
 from Monster import Monster, Zombie, Candy, Vampire, Jelly, Evil_eyes, Goo_skulls
 from Battle import Battle
+from SaveGame import save_game, load_game, show_save_info
 import Ascii
 def text_effect(text):
     for letter in text:
@@ -28,22 +29,38 @@ for tekst in starttekst:
 input("[PRESS ENTER TO CONTINUE]")
 print("-"*75)
 
-#spelertype 
-player_name = " "
-while player_name not in ["A","B","C", "FINN", "ICE KING", "TREE TRUNKS"]:
-    player_name = input("Who do you want to be? (A): Ice king, (B): Finn, (C): Tree trunks\n").upper()  #Speler kiest A, B of C 
-    print()
+# ---------------- SAVE GAME CHECK ----------------
+player = None
+
+has_save = show_save_info()
+
+if has_save:
+    choice = input("Load this save? (Y/N): ").upper()
+    if choice == "Y":
+        player = load_game()
+        Ascii.display_art(player.name)
+        print(f"Welcome back, {player.name}!")
+    else: print("Starting a new game...\n")
+    
+
+
+if player is None:
+    #spelertype
+    player_name = " "
+    while player_name not in ["A","B","C", "FINN", "ICE KING", "TREE TRUNKS"]:
+        player_name = input("Who do you want to be? (A): Ice king, (B): Finn, (C): Tree trunks\n").upper()  #Speler kiest A, B of C 
+        print()
 
 #player = Player(player_name)
-if player_name == "A" or player_name == "Ice king":
-    player = Player("Ice king")
-    Ascii.display_art("Ice king")
-elif player_name == "B" or player_name == "Finn":
-    player = Player("Finn")
-    Ascii.display_art("Finn")
-elif player_name == "C" or player_name == "Tree trunks":
-    player = Player("Tree trunks")
-    Ascii.display_art("Tree trunks")
+    if player_name == "A" or player_name == "Ice king":
+        player = Player("Ice king")
+        Ascii.display_art("Ice king")
+    elif player_name == "B" or player_name == "Finn":
+        player = Player("Finn")
+        Ascii.display_art("Finn")
+    elif player_name == "C" or player_name == "Tree trunks":
+        player = Player("Tree trunks")
+        Ascii.display_art("Tree trunks")
  
 
     
@@ -79,5 +96,6 @@ print("Your final stats are:")
 player.print_stats()
 print()
 print("Thanks for playing")
+
 
 
