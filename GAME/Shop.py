@@ -155,3 +155,4 @@ class Shop:
                 print("Please enter a  number or '123' o leave")
                 
 
+
