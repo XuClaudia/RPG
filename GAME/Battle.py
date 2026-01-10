@@ -5,6 +5,7 @@ from Monster import Monster, Zombie, Candy, Vampire, Jelly, Evil_eyes, Goo_skull
 from Shop import Shop
 from Player import Player
 from SaveGame import save_game
+import Locations
 import Ascii
 import random
 import time
@@ -16,8 +17,9 @@ def text_effect(text):
         time.sleep(0.01)
         
 class Battle:
-    def __init__(self, player):
+    def __init__(self, player, current_location_name="Unknown"):
         self.player = player #link naar player
+        self.current_location_name = current_location_name 
         self.difficulty = random.randint(1,3) #naar aantal monsters
         self.monster_list = []
         self.xp_value = 0
@@ -75,7 +77,7 @@ class Battle:
             loot_type = random.choice(loot_list)
             
             if loot_type == "Weapon":
-                item = Weapon(random.randint(self.player.level, self.player.level + 1))
+                item = Weapon(random.randint(self.player.level, self.player.level + 1), self.player.name)
                 print("Yay, the monsters dropped new weapon")
             elif loot_type == "Armor":
                 item = Armor(random.randint(self.player.level, self.player.level + 1))
@@ -144,7 +146,10 @@ class Battle:
             max_target = len(self.monster_list)
             target = -1
             while target < 1 or target > max_target:
-                target = int(input("Which monster would you like to attack? ( 1 - " + str(max_target) + ")"))
+                try:
+                    target = int(input("Which monster would you like to attack? ( 1 - " + str(max_target) + ")"))
+                except ValueError:
+                    print("Please enter a valid number!")
             target -= 1
         else:
             target = 0 #plek nul in de lijst monster 1
@@ -218,7 +223,6 @@ class Battle:
         self.player.hp = 0
     
     def fight_battle(self): #game loop
-        print("You are under attack")
         time.sleep(1)
         
         while True:
@@ -228,10 +232,22 @@ class Battle:
             #print("\n" + "###" + " BATTLE ROUND " + "#"*60)
             self.battle_stats()
             
-            player_action = " "
-            while player_action not in ["S","F","H","R", "B", "V", "Q"]:
-                player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, (B)uy_items, sa(V)e, (Q)uit\n").upper()
-                print()
+            has_shop = True  # default
+            for location in Locations.LOCATIONS:
+                if location["name"] == self.current_location_name:
+                    has_shop = location.get("has_shop", True)
+                    break
+                
+            if has_shop:
+                player_action = " "
+                while player_action not in ["S","F","H","R", "O", "V", "Q"]:
+                    player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, sh(O)p, sa(V)e, (Q)uit\n").upper()
+                    print()
+            else:
+                player_action = " "
+                while player_action not in ["S","F","H","R", "V", "Q"]:
+                    player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, sa(V)e, (Q)uit\n").upper()
+                    print()
             
             if player_action == "S":
                 self.player.print_stats()
@@ -249,13 +265,14 @@ class Battle:
                     
                 else:
                     print()
-                    print("\n" + "#"*82)
+                    print("\n" + "#"*90)
                     print("\n" + "###" + " You won " +"#"*70)
-                    print("\n" + "#"*82)
+                    print("\n" + "#"*90)
                     
                     self.player.xp_gain(self.xp_value)
                     self.generate_loot()
                     input("[PRESS ENTER TO CONTINUE]")
+                    self.player.level += 1
                     break
                 
             elif player_action == "H":
@@ -269,9 +286,9 @@ class Battle:
                 else:
                     self.monster_attack()
                     
-            elif player_action == "B":
-                shop = Shop(self.player)
-                shop.shop_loop()
+            elif player_action == "O":
+                    shop = Shop(self.player)
+                    shop.shop_loop()
                 
             elif player_action == "V":
                 save_game(self.player)    
@@ -289,4 +306,5 @@ class Battle:
                  
                 break
                 
+
 
