@@ -30,10 +30,11 @@ class Monster:
             print("HP:", self.hp, "/", self.max_hp)
         else:
             print(self.monster_type, "defeated")
-    #--------------------------------Verschillende soorten monsters -----------------------------------------
-# Spelertype 1: Ice king(Archer) Spelertype 2: Finn(sword player) Spelertype 3: Tree Trunks (archer)
-# Wapens voor type 1: a. Snowball b. Iceicle c. gunter(dingen gooien) Type 2: a. Pocket knife b. Finn's sword c. Katana Type: 3: a. spoon b. Rock c. Apple pie
-# Monsters die tegenkomt: A. Zombie B. Candy C. vampire D. Jelly Cube E. Evil Eyes F. Goo skulls
+            
+#--------------------------------Verschillende soorten monsters -----------------------------------------
+    # Spelertype 1: Ice king(Archer) Spelertype 2: Finn(sword player) Spelertype 3: Tree Trunks (archer)
+    # Wapens voor type 1: a. Snowball b. Iceicle c. gunter(dingen gooien) Type 2: a. Pocket knife b. Finn's sword c. Katana Type: 3: a. spoon b. Rock c. Apple pie
+    # Monsters die tegenkomt: A. Zombie B. Candy C. vampire D. Jelly Cube E. Evil Eyes F. Goo skulls
 
 # De zombie(monster) zorgt ervoor dat de weapon damage van de speler lager wordt. De bijbehorende overige code zit bij battle code onder def monster_attack +- r. 103
 class Zombie(Monster):     
@@ -53,7 +54,7 @@ class Candy(Monster):
         self.monster_type = "Candy"
         self.hp = self.max_hp = self.level * 25
         self.min_damage = self.level + 2
-        self.max_damage = self.level + 4
+        self.max_damage = self.level + 3
         self.xp_value = 100 + self.level * 25
         self.gold_value = 5 + self.level * 50
         
@@ -83,7 +84,7 @@ class Jelly(Monster):
         self.monster_type = "Jelly"
         self.hp = self.max_hp = level * 20
         self.min_damage = self.level + 1
-        self.max_damage = self.level * 3
+        self.max_damage = self.level * 4
         self.xp_value = 100 + self.level * 20
         self.gold_value = 5 + self.level * 40
 
@@ -135,7 +136,7 @@ class Goo_skulls(Monster):
         self.monster_type = "Goo_skulls"
         self.hp = self.max_hp = self.level * 20
         self.min_damage = 1
-        self.max_damage = self.level * 4
+        self.max_damage = self.level * 2
         self.xp_value = 100 + self.level * 20
         self.gold_value = 5 + self.level * 50
         self.crit_chance = max(30, level * 10)
@@ -149,3 +150,4 @@ class Goo_skulls(Monster):
             
         print(self.monster_type, "attacks for", damage, "damage")
         return damage
+
