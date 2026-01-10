@@ -8,17 +8,17 @@ def text_effect(text):
         time.sleep(0.01)
 
 class Player:
-    level = 1
-    xp = 0
-    next_level_xp = 500
-    hp = 50
-    max_hp = 50
-    gold = 10
     
     def __init__(self, name):
         self.name = name
+        self.level = 1
+        self.xp = 0
+        self.next_level_xp = 500
+        self.hp = 50
+        self.max_hp = 50
+        self.gold = 10
         self.weapon = Weapon (1, name)
-        self.armor = Armor (1)
+        self.armor = Armor(1)
         self.has_grenade = False
         self.skip_attack = False
 
@@ -45,12 +45,14 @@ class Player:
                 print("ouch! You take", final_damage, "damage!")
                 print("You have", self.hp, "hitpoints left!")
                 time.sleep(1)
+                #input("[PRESS ENTER TO CONTINUE]")
     
         else:
             #geen damage/ afgeweerd
             print("Your shiny armor protects you: You take no damage!")
             time.sleep(1)
-            
+        
+        
     def heal(self, heal_amount):
         self.hp += heal_amount
         if self.hp > self.max_hp:
@@ -72,24 +74,12 @@ class Player:
             self.max_hp = int(self.max_hp * 1.2)
             self.hp = self.max_hp
            
-            if self.level == 1:
-                #wordt level 2
-                self.weapon_type = weapon_list[1]
-                print("YAYYY! You have reached level", self.level, "!")
-            elif self.level == 2:
-                #wordt level 3
-                self.weapon_type = weapon_list[2]
-                print("YAYYY! You have reached level", self.level, "!")
+            if self.level == 2:
+                self.weapon = Weapon(self.level, self.name)
+                print("Your weapon has been upgraded!")
             elif self.level == 3:
-                print("You have reach the FINAL BATTLE")
-                print("You now get the chance to level up your weapon")
-                #dit kan later een item shop worden
-                ##############
-                self.weapon_type = weapon_list[2]
-                y = input(int("Choose a number between 1 and 5"))
-                self.max_damage = self.item_level * y
-                
-                #wapen blijft het zelfde, maar krijgt nu de mogelijkheid om beter te worden
+                self.weapon = Weapon(self.level, self.name)
+                print("Your weapon has reached its final form!")
             
                 
             self.print_stats()
@@ -100,9 +90,9 @@ class Player:
         
         
     def equip_item(self, item):
-        if item.item_type == "weapon":
+        if item.item_type == "Weapon":
             self.weapon = item
-        elif item.item_type == "armor":
+        elif item.item_type == "Armor":
             self.armor = item
             
         self.print_stats()
@@ -110,13 +100,15 @@ class Player:
     
     
     def print_stats(self):
-        print("  Name: " + self.name + "\n")
-        print("  Level: " + str(self.level) + "\n")
-        print("  HP: " + str(self.hp) + "/" + str(self.max_hp) + "\n")
-        print("  XP: " + str(self.xp) + "/" + str(self.next_level_xp) + "\n")
-        print("  Gold: " + str(self.gold) + "\n")
-        print("-"*70 + "\n")
+        print("="*90)
+        print("  Name: " + self.name)
+        print("  Level: " + str(self.level) )
+        print("  HP: " + str(self.hp) + "/" + str(self.max_hp))
+        print("  XP: " + str(self.xp) + "/" + str(self.next_level_xp))
+        print("  Gold: " + str(self.gold))
+        print("-"*90 )
         self.weapon.print_stats()
         self.armor.print_stats()
-        print("###########################################\n")
+        print("="*90)
+
 
