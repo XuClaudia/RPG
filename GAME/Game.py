@@ -22,8 +22,13 @@ if has_save:
     choice = input("Load this save? (Y/N): ").upper()
     if choice == "Y":
         player = load_game()
-        Ascii.display_art(player.name)
-        print(f"Welcome back, {player.name}!")
+        if player is not None:
+            Ascii.display_art(player.name)
+            print(f"Welcome back, {player.name}!")
+        else:
+            print("⚠️ Save file could not be loaded. Starting new game...")
+            player = None # player blijft None, zodat karakterkeuze verderop gebeurt
+
     else:
         print("Starting a new game...\n")
         print("="*90)
@@ -78,7 +83,7 @@ if player is None:
     Ascii.display_art("Map")
     text_effect("Here is the game map!\nYou are now at the start of your journey...\n")
     text_effect("I think I spotted the Candy Kingdom in the distance, through the trees.\n")
-    text_effect("Its gumdrop towers and candy cane spires are hard to miss,\n")
+    text_effect("It's gumdrop towers and candy cane spires are hard to miss,\n")
     text_effect("even from here.\n")
     text_effect("The forest path seems to lead right toward it.\n")
     text_effect("Let's move to there and see if there is need of any heroic assistance—\n")
@@ -130,9 +135,9 @@ while player.hp > 0 and current_location_index < len(LOCATIONS):
         print("-"*90)
         input("\n[PRESS ENTER TO CONTINUE]")
         
-        text_effect(f"\n⚔️ You arrived {location['name']}!\n")
+        text_effect(f"\n⚔️ You arrived at {location['name']}!\n")
         if location["name"] == "Candy Kingdom":
-            text_effect("The Candy Kingdom has fallen to darkness.\nIts once-sweet inhabitants are now twisted monsters\n")
+            text_effect("The Candy Kingdom has fallen to darkness.\nIt's once-sweet inhabitants are now twisted monsters\n")
             text_effect("🧟 Zombies with candy-stuck limbs, moaning for 'braaaains... and sprinkles!'\n")
             text_effect("🍭 Candy monsters with razor-sharp sugar crystal weapons\n")
             text_effect("🧛 Vampires drawn by the sweet, magical blood of candy creatures\n")
@@ -180,7 +185,7 @@ while player.hp > 0 and current_location_index < len(LOCATIONS):
             
         else:
             time.sleep(1)  
-            print("Get ready for battle!")
+            print("Get ready for the battle!")
             input("[PRESS ENTER TO CONTINUE]")
             battle_count += 1
             current_location_name = location["name"]  # ← Pak locatienaam
@@ -191,16 +196,24 @@ while player.hp > 0 and current_location_index < len(LOCATIONS):
         if player.hp > 0 and current_location_index < len(LOCATIONS) - 1:
             Ascii.display_art("Map")
             if current_location_index == 0:
-                loc1 = LOCATIONS[current_location_index + 1]
-                loc2 = LOCATIONS[current_location_index + 3]
-                go_next = ""
-                while go_next not in ["A", "B"]:
-                    go_next = input(f"\n➡️ Where do you want to go? (A){loc1['name']} (B){loc2['name']}").upper
+#                 loc1 = LOCATIONS[current_location_index + 1]
+#                 loc2 = LOCATIONS[current_location_index + 3]
+        # B = Surprise, C = Lumpy Space
+                  loc_B = next(loc for loc in LOCATIONS if loc["name"] == "Surprise")
+                  loc_C = next(loc for loc in LOCATIONS if loc["name"] == "Lumpy Space")
+                  go_next = ""
+                  #Hb zelf "A", "B" naar c verandert en de rest heb ik gelaten maar een # voor geplaatst. Want vond da logischer.
+                  #Nu zit ik vast bij suprise ook nadat ik het getal goed heb geraden hoort da?
+                  while go_next not in ["B", "C"]:  
+                      #go_next = input(f"\n➡️ Where do you want to go? (B){loc1['name']} (C){loc2['name']}").upper()
+                      go_next = input(f"\n➡️ Where do you want to go? (B){loc_B['name']} (C){loc_C['name']}").upper()
                     #print(f"   Required level: {next_loc['unlock_level']}")
-                if go_next == "A":
-                    current_location_index += 1
-                elif go_next == "B":
-                    current_location_index += 3
+                  if go_next == "B":
+                      #current_location_index += 1
+                      current_location_index = LOCATIONS.index(loc_B)
+                  elif go_next == "C":
+                      #current_location_index += 3
+                      current_location_index = LOCATIONS.index(loc_C)       
             elif current_location_index == 1:
                 current_location_index += 1
             elif current_location_index == 2:
@@ -213,6 +226,7 @@ print("Your final stats are:")
 player.print_stats()
 print()
 print("Thanks for playing")
+
 
 
 
