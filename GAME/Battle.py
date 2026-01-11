@@ -101,6 +101,7 @@ class Battle:
         else:
             #geen buit gevonden
             print("You found no equip")
+            #player.print_stats()
              
             
     def monster_attack(self):
@@ -232,21 +233,21 @@ class Battle:
             #print("\n" + "###" + " BATTLE ROUND " + "#"*60)
             self.battle_stats()
             
-            has_shop = True  # default
+            not_has_shop = False  # default
             for location in Locations.LOCATIONS:
                 if location["name"] == self.current_location_name:
-                    has_shop = location.get("has_shop", True)
+                    not_has_shop = location.get("has_shop", False)
                     break
                 
-            if has_shop:
+            if not_has_shop:
                 player_action = " "
                 while player_action not in ["S","F","H","R", "O", "V", "Q"]:
-                    player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, sh(O)p, sa(V)e, (Q)uit\n").upper()
+                    player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, sh(O)p, sa(V)e, (Q)uit").upper()
                     print()
             else:
                 player_action = " "
                 while player_action not in ["S","F","H","R", "V", "Q"]:
-                    player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, sa(V)e, (Q)uit\n").upper()
+                    player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, sa(V)e, (Q)uit").upper()
                     print()
             
             if player_action == "S":
@@ -266,13 +267,14 @@ class Battle:
                 else:
                     print()
                     print("\n" + "#"*90)
-                    print("\n" + "###" + " You won " +"#"*70)
-                    print("\n" + "#"*90)
+                    print( "####" + "  YOU WON ✧⁺⸜(･ ᗜ ･ )⸝⁺✧  " +"#"*60)
+                    print("#"*90)
                     
                     self.player.xp_gain(self.xp_value)
+                    self.player.gold_gain(self.gold_value)
                     self.generate_loot()
                     input("[PRESS ENTER TO CONTINUE]")
-#                     self.player.level += 1
+                    self.player.level += 1
                     break
                 
             elif player_action == "H":
@@ -306,6 +308,7 @@ class Battle:
                  
                 break
                 
+
 
 
 
