@@ -95,7 +95,8 @@ class Jelly(Monster):
         if random.randint(1, 100) <= 50: # Dan is de aanval dus op de speler.
             print("😵 The Jelly reflects your attack!")
             print(f"You hit YOURSELF for {damage} damage!")
-            player.take_hit(damage)
+            if player is not None:
+                player.take_hit(damage)
         else: #Dan gaat de damage dus normaal en dus op de jelly
             self.hp -= damage
             print(f"You successfully hit the Jelly for {damage} damage!")
@@ -120,7 +121,7 @@ class Evil_eyes(Monster):
             print("👁️ Your armor is already completely broken!")
             return
 
-        if random.randint(1, 100) <= 60:
+        if random.randint(1, 100) <= 45:
             print("👁️ The Evil Eyes stare into your soul...")
             print("🛡️ Your armor is CURSED!")
             print(" Your armor defence before:", player.armor.defence)
@@ -150,4 +151,5 @@ class Goo_skulls(Monster):
             
         print(self.monster_type, "attacks for", damage, "damage")
         return damage
+
 
