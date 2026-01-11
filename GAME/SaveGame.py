@@ -13,11 +13,15 @@ def load_game():
         print("❌ No save game found.")
         return None
     
-    with open(SAVE_FILE, "rb") as file:
-        player = pickle.load(file)
-        
-    print("📂 Game loaded!")
-    return player
+    try:
+        with open(SAVE_FILE, "rb") as file:
+            player = pickle.load(file)
+            print("✅ Save game loaded.")
+            return player
+
+    except Exception:
+        print("❌ Save file corrupted or outdated.")
+        return None
 
 def show_save_info():
     if not os.path.exists(SAVE_FILE):
