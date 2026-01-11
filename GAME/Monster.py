@@ -152,5 +152,84 @@ class Goo_skulls(Monster):
         print(self.monster_type, "attacks for", damage, "damage")
         return damage
 
+class FinalBoss(Monster):
+    def __init__(self, level):
+        Monster.__init__(self, level)
+        self.monster_type = "👑 Corrupted Candy King 👑"
+        self.hp = self.max_hp = self.level * 80
+        self.min_damage = self.level * 6
+        self.max_damage = self.level * 12
+        self.xp_value = 500 + level * 200
+        self.gold_value = 300 + level * 150
+        self.enraged = False
+        
+    def attack(self, player = None):
+        # 40% kans op time-puzzle aanval
+        if random.randint(1, 100) <= 40:
+            self.time_math_puzzle(player)
+            return 0
+        
+        damage = random.randint(self.min_damage, self.max_damage)
+
+        # Enrage fase
+        if self.hp <= self.max_hp * 0.3 and not self.enraged:
+            print("🔥 THE CANDY KING GOES BERSERK!! 🔥")
+            self.min_damage += 5
+            self.max_damage += 10
+            self.enraged = True
+
+        # Crit hit
+        if random.randint(1, 100) <= 25:
+            print("💥 CANDY CRITICAL HIT!")
+            damage *= 2
+
+        print(self.monster_type, "attacks for", damage, "damage")
+        return damage
+
+    def time_math_puzzle(self, player):
+        print("\n🍭 CANDY TIME CHALLENGE!")
+        print("⏱️ Solve the problem FAST!")
+
+        a = random.randint(3, 10)
+        b = random.randint(2, 9)
+        c = random.randint(1, 5)
+
+        correct_answer = a * b + c
+        time_limit = 5  # seconden
+
+        print(f"🧠 {a} × {b} + {c} = ?")
+        print(f"(You have {time_limit} seconds!)")
+
+        start_time = time.time()
+        answer = input("> ")
+        end_time = time.time()
+
+        time_taken = end_time - start_time
+        puzzle_damage = random.randint(20, 35)
+
+        if time_taken > time_limit:
+            print("⏰ TOO SLOW!")
+            player.take_hit(puzzle_damage)
+            print(f"💥 You take {puzzle_damage} damage!")
+
+        elif answer.isdigit() and int(answer) == correct_answer:
+            print("🎉 CORRECT & FAST!")
+            self.take_hit(puzzle_damage)
+            print(f"💥 Candy King takes {puzzle_damage} damage!")
+
+        else:
+            print("❌ WRONG ANSWER!")
+            player.take_hit(puzzle_damage)
+            print(f"💥 You take {puzzle_damage} damage!")
+
+    def candy_overload(self, player):
+        # 80% kans op extra aanval
+        if random.randint(1, 100) <= 80:
+            print("🍬 SUGAR OVERLOAD!")
+            print("⚡ You are forced to attack again!")
+
+            extra_damage = player.attack()
+            self.take_hit(extra_damage)
+
 
 
