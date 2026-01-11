@@ -13,7 +13,7 @@ class Player:
         self.name = name
         self.level = 1
         self.xp = 0
-        self.next_level_xp = 500
+        #self.next_level_xp = 500
         self.hp = 50
         self.max_hp = 50
         self.gold = 10
@@ -66,24 +66,38 @@ class Player:
         print("You have gained ", xp_amount, "xp!.")
         
         #level up
-        if self.xp >= self.next_level_xp:
-            self.level += 1
-            self.xp -=self.next_level_xp
+        #if self.xp >= self.next_level_xp:
+        self.level += 1
+        #self.xp -=self.next_level_xp
+        
+        #self.next_level_xp = int(self.next_level_xp * 1.25)
+        self.max_hp = int(self.max_hp * 1.35)
+        self.hp = self.max_hp
+        '''
+        if self.level in [2, 3, 4]:
+            print(f"✨Your Weapon has been upgraded!")
+            self.weapon = Weapon(self.level, self.name)
+        '''
+        if self.level == 2:
+            old_weapon_list = self.weapon.weapon_list
+            self.weapon = Weapon(self.level, self.name)
+            if len(old_weapon_list) > 1:
+                self.weapon.weapon_type = old_weapon_list[1]
+                self.weapon.set_damage()
+                print(f"✨ Weapon upgraded to: {self.weapon.weapon_type}")
             
-            self.next_level_xp = int(self.next_level_xp * 1.25)
-            self.max_hp = int(self.max_hp * 1.2)
-            self.hp = self.max_hp
-           
-            if self.level == 2:
-                self.weapon = Weapon(self.level, self.name)
-                print("Your weapon has been upgraded!")
-            elif self.level == 3:
-                self.weapon = Weapon(self.level, self.name)
-                print("Your weapon has reached its final form!")
+        elif self.level == 3:
+            old_weapon_list = self.weapon.weapon_list
+            self.weapon = Weapon(self.level, self.name)
             
-                
-            self.print_stats()
+            if len(old_weapon_list) > 2:
+                self.weapon.weapon_type = old_weapon_list[2]
+                self.weapon.set_damage()
+                print(f"✨ Ultimate weapon: {self.weapon.weapon_type}")
+        
             
+        
+        
     def gold_gain(self, gold_amount):
         self.gold += gold_amount
         print("You have gained ", gold_amount, "gold!.")
@@ -104,12 +118,13 @@ class Player:
         print("  Name: " + self.name)
         print("  Level: " + str(self.level) )
         print("  HP: " + str(self.hp) + "/" + str(self.max_hp))
-        print("  XP: " + str(self.xp) + "/" + str(self.next_level_xp))
+        print("  XP: " + str(self.xp) ) #+ "/" + str(self.next_level_xp))
         print("  Gold: " + str(self.gold))
         print("-"*90 )
         self.weapon.print_stats()
         self.armor.print_stats()
         print("="*90)
+
 
 
 
