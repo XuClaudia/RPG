@@ -158,8 +158,4 @@ class Shop:
                     time.sleep(1)
             else:
                 print("Please enter a  number or '123' to leave")
-                
-
-
-
-
+              
