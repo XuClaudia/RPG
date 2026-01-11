@@ -78,7 +78,7 @@ class Battle:
             
             if loot_type == "Weapon":
                 item = Weapon(random.randint(self.player.level, self.player.level + 1), self.player.name)
-                print("Yay, the monsters dropped new weapon")
+                print("Yay, the monsters dropped a new weapon")
             elif loot_type == "Armor":
                 item = Armor(random.randint(self.player.level, self.player.level + 1))
                 print("Yay, the monsters dropped new armor")
@@ -272,7 +272,7 @@ class Battle:
                     self.player.xp_gain(self.xp_value)
                     self.generate_loot()
                     input("[PRESS ENTER TO CONTINUE]")
-                    self.player.level += 1
+#                     self.player.level += 1
                     break
                 
             elif player_action == "H":
@@ -306,5 +306,6 @@ class Battle:
                  
                 break
                 
+
 
 
