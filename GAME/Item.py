@@ -25,15 +25,17 @@ class Weapon(Item):
         
         if weapon_name:
             self.weapon_type = weapon_name #als de naam in de shop al was gegeven
-        elif player_name == "Finn" :
-            weapon_list = ["Knife🔪", "Sword🗡️", "Katana🥷🏼"]
-        elif player_name == "Ice king":
-            weapon_list = ["Snowball❄️", "Icicle🧊", "Gunter🐧"]
-        elif player_name == "Tree trunks" :
-            weapon_list = ["Spoon🥄", "Rock🪨", "Applepie🥧"]
+            self.weapon_list = [weapon_name]
+        else: 
+            if player_name == "Finn" :
+                weapon_list = ["Knife🔪", "Sword🗡️", "Katana🥷🏼"]
+            elif player_name == "Ice king":
+                weapon_list = ["Snowball❄", "Icicle🧊", "Gunter🐧"]
+            elif player_name == "Tree trunks" :
+                weapon_list = ["Spoon🥄", "Rock🪨", "Applepie🥧"]
 
-        self.weapon_list = weapon_list
-        self.weapon_type = weapon_list[0]
+            self.weapon_list = weapon_list
+            self.weapon_type = weapon_list[0]
         self.set_damage()
         
        
@@ -85,7 +87,9 @@ class Weapon(Item):
     def upgrade_damage(self, upgrade_amount): #shop
         self.min_damage += upgrade_amount
         self.max_damage += upgrade_amount
-        print("⚡ Weapon upgraded! Damage: " + self.min_damage + " - " + self.max_damage)
+        print(f"⚡ Weapon upgraded! Damage: {self.min_damage} - {self.max_damage}")
+#         print("⚡ Weapon upgraded! Damage: " + self.min_damage + " - " + self.max_damage)
+
 
     def print_stats(self):
         Item.print_stats(self)
@@ -111,6 +115,7 @@ class Armor(Item):
         Item.print_stats(self)
         print(self.armor_type + "_defence:" + str(self.defence))
         
+
 
 
 
