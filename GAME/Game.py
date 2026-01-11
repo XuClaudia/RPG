@@ -269,8 +269,3 @@ player.print_stats()
 print()
 print("Thanks for playing")
 
-
-
-
-
-
