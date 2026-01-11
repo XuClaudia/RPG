@@ -76,7 +76,7 @@ if player is None:
     print("  Name: " + player.name)
     print("  Level: " + str(player.level) )
     print("  HP: " + str(player.hp) + "/" + str(player.max_hp))
-    print("  XP: " + str(player.xp) + "/" + str(player.next_level_xp))
+    print("  XP: " + str(player.xp))# + "/" + str(player.next_level_xp))
     print("  Gold: " + str(player.gold))
     print("-"*90 )
     input("[PRESS ENTER TO CONTINUE]")
@@ -111,6 +111,10 @@ while player.hp > 0 and current_location_index < len(LOCATIONS):
         print(f"   Your level: {player.level}")
         print("\nYou need to gain more experience first!")
         time.sleep(1)
+        input("[PRESS ENTER TO CONTINUE]")
+        print("What a coincidence! I see some monsters over there...")
+        print("Oh no! It looks like they spotted you!")
+        time.sleep(2)
         battle_count += 1
         print(f"\n⚔️ BATTLE {battle_count} ⚔️")
         battle = Battle(player)
@@ -118,7 +122,7 @@ while player.hp > 0 and current_location_index < len(LOCATIONS):
     
     elif player.level >= location["unlock_level"]:
         print(f"\n🔒 {location['name']} is unlocked!")
-        # Toon ASCII art
+        time.sleep(1.5)
         Ascii.display_art("travel")
         time.sleep(2)
         if location["ascii"] in Ascii.ASCII:
@@ -152,7 +156,7 @@ while player.hp > 0 and current_location_index < len(LOCATIONS):
             text_effect("💜 Candy monsters turned purple and irregular\n")
             text_effect("💜 Vampires distorted by the space's weirdness\n")
             text_effect("💜 And things that defy description...\n")
-            text_effect("💜 Either way, you're surrounded.\n")
+            text_effect("💜 Either way, you're surrounded -- again.\n")
         elif location["name"] == "Fire Kingdom":
             text_effect("\nThe heat hits you like a physical force. Sweat evaporates instantly.\n")
             text_effect("🔥 Zombies whose rotting flesh crackles with embers\n")
@@ -163,16 +167,38 @@ while player.hp > 0 and current_location_index < len(LOCATIONS):
             time.sleep(3)    
             
         if location["name"] == "Surprise":
-            #hier moeten random games komen en niet maar eentje
-            print("\n🎮 MINIGAME TIME!")
-            print("Guess the number between 1-10!")
-            secret = random.randint(1, 10)
-            guess = int(input("Your guess: "))
-            if guess == secret:
-                print("🎉 You win 50 gold!")
-                player.gold += 50
-            else:
-                print(f"❌ Wrong! The number was {secret}")
+            #Hier zouden meer mini games kunnen komen
+            lostgame = True
+            while lostgame == True:
+                print("\n🎮 MINIGAME TIME!")
+                print("Guess the number between 1-5!")
+                secret = random.randint(1, 5)
+                while True:
+                    try:
+                        guess = int(input("Your guess (1-5): ")) #kijkt of speler wel 1-5 invult
+                        if 1 <= guess <= 5:
+                            break
+                        else:
+                            print("Please enter 1-5!")
+                    except:
+                        print("Enter a number!")
+    
+                if guess == secret:
+                    print("🎉 You win 50 gold!")
+                    player.gold += 50
+                    player.level += 1
+                    lostgame = False
+                    break  # Verlaat de loop
+                else:
+                    print(f"❌ Wrong! The number was {secret}")
+                    print("Try again!")
+                    
+            print("\n🎪 Minigame finished!!")
+            Ascii.display_art("Map")
+            print("Your next stop: Fire kingdom!")
+            input("[PRESS ENTER TO CONTINUE]")
+            Ascii.display_art("travel")
+            current_location_index = 1   
                 
         elif location["name"] == "End Boss":
             print("\nMUAHAHAHAHHAAA 👹 FINAL BOSS BATTLE!")
@@ -213,11 +239,27 @@ while player.hp > 0 and current_location_index < len(LOCATIONS):
                       current_location_index = LOCATIONS.index(loc_B)
                   elif go_next == "C":
                       #current_location_index += 3
-                      current_location_index = LOCATIONS.index(loc_C)       
+                      current_location_index = LOCATIONS.index(loc_C)
+                      
             elif current_location_index == 1:
                 current_location_index += 1
             elif current_location_index == 2:
                 current_location_index = 4
+                if player.xp > 550:
+                    print("You are now strong enough")
+                else:
+                    print("You are too weak...")
+                    print("You need to improve your skilss, So..")
+                    loc_B = next(loc for loc in LOCATIONS if loc["name"] == "Surprise")
+                    loc_C = next(loc for loc in LOCATIONS if loc["name"] == "Lumpy Space")
+                    go_next = ""
+                    while go_next not in ["B", "C"]:
+                        go_next = input(f"\n➡️ Where do you want to go? (B){loc_B['name']} (C){loc_C['name']}").upper()
+                    if go_next == "B":
+                        current_location_index = LOCATIONS.index(loc_B)
+                    elif go_next == "C":
+                        current_location_index = LOCATIONS.index(loc_C)
+
                     
     
 print()
@@ -226,6 +268,7 @@ print("Your final stats are:")
 player.print_stats()
 print()
 print("Thanks for playing")
+
 
 
 
