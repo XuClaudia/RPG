@@ -13,7 +13,7 @@ class Item:
         self.item_level = item_level
         
     def print_stats(self):
-        text_effect("  "import time
+        text_effect("  ")
 
 def text_effect(text):
     for letter in text:
@@ -138,7 +138,7 @@ class Armor(Item):
 
 
 
- +self.item_type + ": " ) #+ str(self.item_level)
+# +self.item_type + ": " ) #+ str(self.item_level)
         
 import random
 
@@ -240,10 +240,3 @@ class Armor(Item):
         Item.print_stats(self)
         print(self.armor_type + "_defence:" + str(self.defence))
         
-
-
-
-
-
-
-
