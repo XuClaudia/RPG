@@ -1,7 +1,7 @@
 ##regel 113
 
 from Item import Item, Weapon, Armor
-from Monster import Monster, Zombie, Candy, Vampire, Jelly, Evil_eyes, Goo_skulls
+from Monster import Monster, Zombie, Candy, Vampire, Jelly, Evil_eyes, Goo_skulls, FinalBoss
 from Shop import Shop
 from Player import Player
 from SaveGame import save_game
@@ -20,10 +20,20 @@ class Battle:
     def __init__(self, player, current_location_name="Unknown"):
         self.player = player #link naar player
         self.current_location_name = current_location_name 
-        self.difficulty = random.randint(1,3) #naar aantal monsters
         self.monster_list = []
         self.xp_value = 0
         self.gold_value = 0
+        
+        # --- SPECIAL CASE: FINAL BOSS ---
+        if self.current_location_name == "End Boss":
+            boss = FinalBoss(self.player.level)
+            self.monster_list.append(boss)
+            self.difficulty = 1
+            self.xp_value = boss.xp_value
+            self.gold_value = boss.gold_value
+            return  # stop met normale monsters spawn        
+        
+        self.difficulty = random.randint(1,3) #naar aantal monsters
         monster_type = ["Zombie", "Candy", "Vampire", "Jelly", "Evil_eyes", "Goo_skulls"]
         
         for i in range(self.difficulty): #monsters maken
@@ -134,6 +144,9 @@ class Battle:
        #Als het een evil_eyes is dan voert die zijn effect uit.     
             if isinstance(monster, Evil_eyes):
                 monster.verzwak_armor(self.player)
+            
+            if isinstance(monster, FinalBoss):
+                monster.candy_overload(self.player)
     
     def player_attack(self):
         #monsters zijn genummerd
@@ -205,14 +218,14 @@ class Battle:
             print("You hit the dead monster, it is still dead...\n")
     
     def player_heal(self):
-        if random.randint(1,100) <= 40:
+        if random.randint(1,100) <= 50:
             heal_amount = (random.randint(self.player.max_hp // 4, self.player.max_hp //3))
             self.player.heal(heal_amount)
         else:
             print("You tried to heal yourself, it failed...")
             
     def player_run(self):
-        if random.randint(1, 100) <= 25:
+        if random.randint(1, 100) <= 35:
             print("You ran away as fast as you could and you lost the monsters")
             return True
         else:
@@ -308,7 +321,5 @@ class Battle:
                  
                 break
                 
-
-
 
 
