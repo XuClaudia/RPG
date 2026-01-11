@@ -17,13 +17,14 @@ universal_items = [
         "cost": 110,
         "type": "Attack",
         "description": "Does +20 damage on next attack",
-        "requirement": lambda player: player.gold >= 90,
+        "requirement": lambda player: player.gold >= 110,
         "effect": lambda player:(
             setattr(player, 'has_grenade', True),
             print("💣 You bought a grenade! Next attack will be explosive!")
-        )  }
+        )
+    }
     
-    ]
+]
 
 character_specific_items = {
     "Finn": [
@@ -35,7 +36,8 @@ character_specific_items = {
          "effect": lambda player: (
              setattr(player.weapon, 'min_damage', player.weapon.min_damage + 5),
              setattr(player.weapon, 'max_damage', player.weapon.max_damage + 5),
-             print("✨ Sword polished! Damage:" + player.weapon.min_damage + " - " + player.weapon.max_damage))
+             print(f"✨ Sword polished! Damage: {player.weapon.min_damage} - {player.weapon.max_damage}"))
+
         },
         {"name": "Dragon🐉_sword",
          "cost": 157,
@@ -45,6 +47,7 @@ character_specific_items = {
          "effect": lambda player: player.equip_item( Weapon(player.level, player.name, "Dragon_sword")
         )}
     ],
+    
     "Ice king": [
         {"name": "Ice Gem",
          "cost": 62,
@@ -52,9 +55,9 @@ character_specific_items = {
          "description": "Makes ice spells 20% stronger",
          "requirement": lambda player: player.gold >= 120,
          "effect": lambda player: (
-             setattr(player.weapon, 'min_damage', player.weapon.min_damage*1.2),
-             setattr(player.weapon, 'max_damage', player.weapon.max_damage*1.2),
-             print("❄Ice magic boosted! Damage:" + player.weapon.min_damage + " - " + player.weapon.max_damage))
+             setattr(player.weapon, 'min_damage', int(player.weapon.min_damage * 1.2)),
+             setattr(player.weapon, 'max_damage', int(player.weapon.max_damage * 1.2)),
+             print(f"❄ Ice magic boosted! Damage: {player.weapon.min_damage} - {player.weapon.max_damage}"))
         },
         {"name": "princess_love",
          "cost": 173,
@@ -64,6 +67,7 @@ character_specific_items = {
          "effect": lambda player: player.heal(20)
         }
     ],
+    
     "Tree trunks": [
         {"name": "Fork",
          "cost": 76,
@@ -72,6 +76,7 @@ character_specific_items = {
          "requirement": lambda player: player.gold >= 60,
          "effect": lambda player: player.equip_item( Weapon(player.level, player.name, "Fork"))
         },
+        
         {"name": "Apple Pie",
          "cost": 67,
          "type": "Healing",
@@ -152,7 +157,8 @@ class Shop:
                 if success:
                     time.sleep(1)
             else:
-                print("Please enter a  number or '123' o leave")
+                print("Please enter a  number or '123' to leave")
                 
+
 
 
