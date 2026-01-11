@@ -45,7 +45,7 @@ class Zombie(Monster):
         self.min_damage = 1
         self.max_damage = 3
         self.xp_value = 100 + self.level * 25
-        self.gold_value = 5 + self.level * 50
+        self.gold_value = 5 + self.level * 30
 
 #De candy(monster) zorgt ervoor dat de speler een kans heeft om niet meer aan te vallen bij een ronde.        
 class Candy(Monster):                      
@@ -75,18 +75,18 @@ class Vampire(Monster):
         self.min_damage = self.level + 1
         self.max_damage = self.level * 3
         self.xp_value = 100 + self.level * 20
-        self.gold_value = 5 + self.level * 50
+        self.gold_value = 5 + self.level * 20
 
 #De Jelly(monster) zorgt ervoor dat de speler een aanval op zichzelf riskeert. De speler heeft 50% kans dat zijn eigen damage kapot gaat of er komt juist damage op de monster.
 class Jelly(Monster):
     def __init__(self, level):
         Monster.__init__(self, level)
         self.monster_type = "Jelly"
-        self.hp = self.max_hp = level * 20
+        self.hp = self.max_hp = level * 15
         self.min_damage = self.level + 1
         self.max_damage = self.level * 4
         self.xp_value = 100 + self.level * 20
-        self.gold_value = 5 + self.level * 40
+        self.gold_value = 5 + self.level * 55
 
     
     def take_hit(self, damage, player = None):
@@ -114,7 +114,7 @@ class Evil_eyes(Monster):
         self.min_damage = self.level + 1
         self.max_damage = self.level * 3
         self.xp_value = 100 + self.level * 20
-        self.gold_value = 5 + self.level * 50
+        self.gold_value = 7 + self.level * 50
         
     def verzwak_armor(self, player):
         if player.armor.defence <= 0:
@@ -137,9 +137,9 @@ class Goo_skulls(Monster):
         self.monster_type = "Goo_skulls"
         self.hp = self.max_hp = self.level * 20
         self.min_damage = 1
-        self.max_damage = self.level * 2
+        self.max_damage = self.level * 5
         self.xp_value = 100 + self.level * 20
-        self.gold_value = 5 + self.level * 50
+        self.gold_value = 6 + self.level * 36
         self.crit_chance = max(30, level * 10)
         
     def attack(self):
@@ -151,5 +151,6 @@ class Goo_skulls(Monster):
             
         print(self.monster_type, "attacks for", damage, "damage")
         return damage
+
 
 
