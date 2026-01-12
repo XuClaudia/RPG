@@ -156,9 +156,9 @@ class FinalBoss(Monster):
     def __init__(self, level):
         Monster.__init__(self, level)
         self.monster_type = "👑 Corrupted Candy King 👑"
-        self.hp = self.max_hp = self.level * 80
-        self.min_damage = self.level * 6
-        self.max_damage = self.level * 12
+        self.hp = self.max_hp = 100
+        self.min_damage = 10
+        self.max_damage = 25
         self.xp_value = 500 + level * 200
         self.gold_value = 300 + level * 150
         self.enraged = False
@@ -230,6 +230,7 @@ class FinalBoss(Monster):
 
             extra_damage = player.attack()
             self.take_hit(extra_damage)
+
 
 
 
