@@ -281,7 +281,7 @@ class Battle:
                 else:
                     print()
                     print("\n" + "#"*90)
-                    print( "####" + "  YOU WON ✧⁺⸜(･ ᗜ ･ )⸝⁺✧  " +"#"*60)
+                    printer.print_purple( "####" + "  YOU WON ✧⁺⸜(･ ᗜ ･ )⸝⁺✧  " +"#"*60)
                     print("#"*90)
                     
                     self.player.xp_gain(self.xp_value)
@@ -322,6 +322,7 @@ class Battle:
                  
                 break
                 
+
 
 
 
