@@ -171,7 +171,7 @@ class Battle:
         monster = self.monster_list[target]
             
         #Strijdkreetjes van de monsters
-        elif isinstance (monster, Candy):
+        if isinstance (monster, Candy):
             text_effect("My taste may be sweet BUT\n")
             time.sleep(0.5)
             text_effect("Too much of me will effect you.\n")
@@ -308,6 +308,7 @@ class Battle:
                  
                 break
                 
+
 
 
 
