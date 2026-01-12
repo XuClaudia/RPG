@@ -266,9 +266,9 @@ class Battle:
                     
                 else:
                     print()
-                    print("\n" + "#"*90)
+                    printer.print_green("\n" + "#"*90)
                     printer.print_green( "####" + "  YOU WON ✧⁺⸜(･ ᗜ ･ )⸝⁺✧  " +"#"*60) #Dit zou in het groen moeten wordt uitgeprint
-                    print("#"*90)
+                    printer.print_green("#"*90)
                     
                     self.player.xp_gain(self.xp_value)
                     self.player.gold_gain(self.gold_value)
@@ -308,6 +308,7 @@ class Battle:
                  
                 break
                 
+
 
 
 
