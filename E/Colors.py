@@ -1,8 +1,8 @@
 from colorama import init, Fore, Back, Style
 
-# Initialiseer colorama (belangrijk!)
+# Initialiseer colorama 
 init(autoreset=True)
-
+#------------ Ascii art kleur toewijzen-------------
 class Color:
     RED = Fore.RED
     GREEN = Fore.GREEN
@@ -12,7 +12,7 @@ class Color:
     CYAN = Fore.CYAN
     WHITE = Fore.WHITE
     RESET = Style.RESET_ALL
-
+#------------- Tekst kleur toewijzen ------------------
 class TextPrinter:
     def __init__(self):
         self.colors = Color()
@@ -30,7 +30,6 @@ class TextPrinter:
         print(self.colors.BLUE + text)
     
     def print_with_color(self, text, color_name):
-        """Print text with dynamic color choice"""
         color_map = {
             "red": self.colors.RED,
             "green": self.colors.GREEN,
@@ -41,5 +40,5 @@ class TextPrinter:
             "white": self.colors.WHITE
         }
         
-        color = color_map.get(color_name.lower(), self.colors.WHITE)
-        print(color + text)
+        color = color_map.get(color_name.lower(), self.colors.WHITE) #KLeur geven en anders wit
+        print(color + text) #tekst in de bijbehorende kleur printen
