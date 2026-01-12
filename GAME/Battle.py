@@ -218,14 +218,14 @@ class Battle:
             print("You hit the dead monster, it is still dead...\n")
     
     def player_heal(self):
-        if random.randint(1,100) <= 50:
+        if random.randint(1,100) <= 65:
             heal_amount = (random.randint(self.player.max_hp // 4, self.player.max_hp //3))
             self.player.heal(heal_amount)
         else:
             print("You tried to heal yourself, it failed...")
             
     def player_run(self):
-        if random.randint(1, 100) <= 35:
+        if random.randint(1, 100) <= 40:
             print("You ran away as fast as you could and you lost the monsters")
             return True
         else:
@@ -321,5 +321,6 @@ class Battle:
                  
                 break
                 
+
 
 
