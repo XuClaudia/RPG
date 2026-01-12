@@ -1,0 +1,103 @@
+import random
+#op locatie surprise krijg je een random minigame te spelen
+class MiniGames:
+    
+    @staticmethod#geeft dat de functie in deze class niet afhankelijk is van gegevens uit de class self
+    def guess_the_number(player):
+        #Raad het nummer tussen 1-5
+        print("\n🎮 MINIGAME: Guess the Number!")
+        print("Guess between 1-5!")
+        
+        secret = random.randint(1, 5)
+        while True:
+            try:
+                guess = int(input("Your guess (1-5): "))
+                if 1 <= guess <= 5:
+                    break
+                else:
+                    print("Please enter 1-5!")
+            except:
+                print("Enter a number!")
+        
+        if guess == secret:
+            print("🎉 You win 50 gold!")
+            player.gold += 50
+            return True
+        else:
+            print(f"❌ Wrong! The number was {secret}")
+            return False
+    
+    @staticmethod
+    def rock_paper_scissors(player):
+        #Rock Paper Scissors
+        print("\n🎮 MINIGAME: Rock Paper Scissors!")
+        choices = ["rock", "paper", "scissors"]
+        
+        computer = random.choice(choices)
+        player_choice = input("Choose (rock/paper/scissors): ").lower()
+        
+        if player_choice not in choices:
+            print("Invalid choice!")
+            return False
+        
+        print(f"BMO chose: {computer}")
+        
+        if player_choice == computer:
+            print("🤝 It's a tie! 25 gold!")
+            player.gold += 25
+            return True
+        elif (player_choice == "rock" and computer == "scissors") or \
+             (player_choice == "paper" and computer == "rock") or \
+             (player_choice == "scissors" and computer == "paper"):
+            print("🎉 You win! 50 gold!")
+            player.gold += 50
+            return True
+        else:
+            print("❌ You lose!")
+            return False
+    
+    @staticmethod
+    def math_challenge(player):
+        #Reken challenge
+        print("\n🎮 MINIGAME: Math Challenge!")
+        
+        a = random.randint(1, 10)
+        b = random.randint(1, 10)
+        operator = random.choice(["+", "-", "*"])
+        
+        if operator == "+":
+            correct = a + b
+            question = f"{a} + {b} = ?"
+        elif operator == "-":
+            correct = a - b
+            question = f"{a} - {b} = ?"
+        else:  # "*"
+            correct = a * b
+            question = f"{a} × {b} = ?"
+        
+        print(question)
+        
+        try:
+            answer = int(input("Your answer: "))
+            if answer == correct:
+                print("🎉 Correct! 40 gold!")
+                player.gold += 40
+                return True
+            else:
+                print(f"❌ Wrong! The answer was {correct}")
+                return False
+        except:
+            print("Enter a number!")
+            return False
+    
+    @staticmethod
+    def play_random_minigame(player):
+        #Dit zorgt ervoor dat je een van de drie spellen random krijgt
+        games = [
+            MiniGames.guess_the_number,
+            MiniGames.rock_paper_scissors,
+            MiniGames.math_challenge
+        ]
+        
+        game = random.choice(games)
+        return game(player)
