@@ -1,6 +1,6 @@
 LOCATIONS= [
     {
-        "name": "Candy Kingdom",
+        "name": "Candy Kingdom", #"name" is hier een key en "Candy Kingdom" de value
         "description": "The sweetest place in Ooo!",
         "ascii": "Candy",
         "difficulty": 1,
@@ -39,4 +39,5 @@ LOCATIONS= [
         "has_shop": False,
         "unlock_level": 4
     }
+
 ]
