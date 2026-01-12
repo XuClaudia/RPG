@@ -42,3 +42,4 @@ class TextPrinter:
         
         color = color_map.get(color_name.lower(), self.colors.WHITE) #KLeur geven en anders wit
         print(color + text) #tekst in de bijbehorende kleur printen
+
