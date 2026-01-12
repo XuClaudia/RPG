@@ -1,7 +1,7 @@
 from Item import Item, Weapon, Armor
 import random
 import time
-
+#Code in dit document is vooral zelf geschreven
 def text_effect(text):
     for letter in text:
         print(letter, end="")
@@ -22,7 +22,7 @@ class Player:
         self.has_grenade = False
         self.skip_attack = False
 
-    
+    #Ai geholpen met het linken van de logica vanuit de shop
     def attack(self):
         damage = self.level + random.randint(self.weapon.min_damage, self.weapon.max_damage)
         if self.has_grenade:
@@ -73,11 +73,7 @@ class Player:
         #self.next_level_xp = int(self.next_level_xp * 1.25)
         self.max_hp = int(self.max_hp * 1.35)
         self.hp = self.max_hp
-        '''
-        if self.level in [2, 3, 4]:
-            print(f"✨Your Weapon has been upgraded!")
-            self.weapon = Weapon(self.level, self.name)
-        '''
+        
         if self.level == 2:
             old_weapon_list = self.weapon.weapon_list
             self.weapon = Weapon(self.level, self.name)
@@ -124,6 +120,7 @@ class Player:
         self.weapon.print_stats()
         self.armor.print_stats()
         print("="*90)
+
 
 
 
