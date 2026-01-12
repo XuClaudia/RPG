@@ -1,5 +1,3 @@
-##regel 113
-
 from Item import Item, Weapon, Armor
 from Monster import Monster, Zombie, Candy, Vampire, Jelly, Evil_eyes, Goo_skulls, FinalBoss
 from Shop import Shop
@@ -10,7 +8,7 @@ import Ascii
 import random
 import time
 import Colors
-printer = Colors.TextPrinter()
+printer = Colors.TextPrinter() #instance aanmaken zodat tekst in kleur kan worden weergeven
 
 def text_effect(text):
     for letter in text:
@@ -322,6 +320,7 @@ class Battle:
                  
                 break
                 
+
 
 
 
