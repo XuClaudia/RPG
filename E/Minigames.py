@@ -1,4 +1,5 @@
 import random
+#Met AI minigames uitgebreid in een class met twee spellen extra
 #op locatie surprise krijg je een random minigame te spelen
 class MiniGames:
     
@@ -100,4 +101,5 @@ class MiniGames:
         ]
         
         game = random.choice(games)
+
         return game(player)
