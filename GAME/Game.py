@@ -57,7 +57,7 @@ if player is None:
     player_name = " "
     while player_name not in ["A","B","C", "FINN", "ICE KING", "TREE TRUNKS"]:
         #Speler kiest A, B of C 
-        player_name = input("Who do you want to be? (A): Ice king, (B): Finn, (C): Tree trunks").upper()  
+        player_name = input("Who do you want to be? (A): Ice king, (B): Finn, (C): Tree trunks ").upper()  
         print()
 
     #player = Player(player_name)
@@ -268,4 +268,5 @@ print("Your final stats are:")
 player.print_stats()
 print()
 print("Thanks for playing")
+
 
