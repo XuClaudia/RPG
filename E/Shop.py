@@ -2,13 +2,16 @@ from Item import Weapon, Armor
 from Player import Player
 import Ascii
 import time 
-
-universal_items = [
+"""Het spel heeft verschillende players om deze ook verschillende kansen en keuzes te geven is er een onderscheid in de item listen gemaakt, voor een deel. 
+De universal items hebben alle karakters en de andere is karakter specifiek.
+Deze code is voor eengroot deel gegenereerd met AI (key-value listen), maar moesten flink bijgeschaafd worden aan onze game/ gedebugged worden
+"""
+universal_items = [ 
     { "name": "Health_potion",
       "cost": 50,
       "type": "Healing",
       "description": "Restores 5 HP",
-      "requirement": lambda player: player.gold >= 50, #lambda is een functie
+      "requirement": lambda player: player.gold >= 50, #lambda is een andere manier om een functie weer te geven/ te verwijzen
       "effect": lambda player: player.heal(5)
       
     },
@@ -159,5 +162,6 @@ class Shop:
             else:
                 print("Please enter a  number or '123' to leave")
               
+
 
 
