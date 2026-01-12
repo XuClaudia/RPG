@@ -1,3 +1,4 @@
+#Ai de requirements gegeven en de list laten typen in de logica van hieronder
 LOCATIONS= [
     {
         "name": "Candy Kingdom", #"name" is hier een key en "Candy Kingdom" de value
@@ -41,4 +42,5 @@ LOCATIONS= [
     }
 
 ]
+
 
