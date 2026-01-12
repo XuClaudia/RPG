@@ -6,7 +6,6 @@ def text_effect(text):
         time.sleep(0.01)
         
 class Item:
-    inventory = []
     item_type = None
     
     def __init__(self, item_level):
@@ -115,6 +114,7 @@ class Armor(Item):
         Item.print_stats(self)
         print(self.armor_type + "_defence:" + str(self.defence))
         
+
 
 
 
