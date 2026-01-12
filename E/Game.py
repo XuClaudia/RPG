@@ -1,3 +1,4 @@
+from Minigames import MiniGames
 from Player import Player
 from Item import Item, Weapon, Armor
 from Monster import Monster, Zombie, Candy, Vampire, Jelly, Evil_eyes, Goo_skulls
@@ -174,28 +175,20 @@ while player.hp > 0 and current_location_index < len(LOCATIONS):
             #Hier zouden meer mini games kunnen komen
             lostgame = True
             while lostgame == True:
+                print("You meet BMO!!")
                 print("\n🎮 MINIGAME TIME!")
-                print("Guess the number between 1-5!")
-                secret = random.randint(1, 5)
-                while True:
-                    try:
-                        guess = int(input("Your guess (1-5): ")) #kijkt of speler wel 1-5 invult
-                        if 1 <= guess <= 5:
-                            break
-                        else:
-                            print("Please enter 1-5!")
-                    except:
-                        print("Enter a number!")
-    
-                if guess == secret:
-                    print("🎉 You win 50 gold!")
-                    player.gold += 50
+                won = MiniGames.play_random_minigame(player)
+        
+                if won:
+                    print("🎉 You won the minigame!")
+                    player.gold += 50  # Extra bonus
                     player.level += 1
                     lostgame = False
-                    break  # Verlaat de loop
+                    break
                 else:
-                    print(f"❌ Wrong! The number was {secret}")
+                    print("❌ You lost the minigame!")
                     print("Try again!")
+                    # Speler probeert opnieuw
                     
             print("\n🎪 Minigame finished!!")
             Ascii.display_art("Map")
@@ -226,18 +219,12 @@ while player.hp > 0 and current_location_index < len(LOCATIONS):
         if player.hp > 0 and current_location_index < len(LOCATIONS) - 1:
             Ascii.display_art("Map")
             if current_location_index == 0:
-#                 loc1 = LOCATIONS[current_location_index + 1]
-#                 loc2 = LOCATIONS[current_location_index + 3]
-        # B = Surprise, C = Lumpy Space
                   loc_B = next(loc for loc in LOCATIONS if loc["name"] == "Surprise")
                   loc_C = next(loc for loc in LOCATIONS if loc["name"] == "Lumpy Space")
                   go_next = ""
-                  #Hb zelf "A", "B" naar c verandert en de rest heb ik gelaten maar een # voor geplaatst. Want vond da logischer.
-                  #Nu zit ik vast bij suprise ook nadat ik het getal goed heb geraden hoort da?
-                  while go_next not in ["B", "C"]:  
-                      #go_next = input(f"\n➡️ Where do you want to go? (B){loc1['name']} (C){loc2['name']}").upper()
+                  while go_next not in ["B", "C"]:
                       go_next = input(f"\n➡️ Where do you want to go? (B){loc_B['name']} (C){loc_C['name']}").upper()
-                    #print(f"   Required level: {next_loc['unlock_level']}")
+    
                   if go_next == "B":
                       #current_location_index += 1
                       current_location_index = LOCATIONS.index(loc_B)
@@ -272,6 +259,7 @@ print("Your final stats are:")
 player.print_stats()
 print()
 print("Thanks for playing")
+
 
 
 
