@@ -117,8 +117,9 @@ class Battle:
         for monster in self.monster_list:
             if monster.hp <= 0:
                 continue
-            # Zombie effect: weapon verzwakken
-            if isinstance(monster, Zombie):     #van hier tot r. 126 (monster.sugar_effect(self.player)) is gemaakt m.b.v. AI\
+            #van hier tot r. 126 (monster.sugar_effect(self.player)) is gemaakt m.b.v. AI\
+            
+            if isinstance(monster, Zombie):  # Zombie effect: weapon verzwakken / isinstance controleerd of de monster bestaat   
                 print("Whwuuuubuuu whwuuubuu BRAINS.\nI will destroy your WEAPON!")
                 print("Before:", self.player.weapon.min_damage, "-", self.player.weapon.max_damage)
                     
@@ -320,6 +321,7 @@ class Battle:
                  
                 break
                 
+
 
 
 
