@@ -32,7 +32,7 @@ character_specific_items = {
          "cost": 61,
          "type": "Weapon_upgrade",
          "description": "Sharpens your sword (+5 damage)",
-         "requirement": lambda player: player.gold >= 80,
+         "requirement": lambda player: player.gold >= 61,
          "effect": lambda player: (
              setattr(player.weapon, 'min_damage', player.weapon.min_damage + 5),
              setattr(player.weapon, 'max_damage', player.weapon.max_damage + 5),
@@ -43,17 +43,17 @@ character_specific_items = {
          "cost": 157,
          "type": "Weapon",
          "description": "Legendary sword",
-         "requirement": lambda player: player.gold >= 150,
+         "requirement": lambda player: player.gold >= 157,
          "effect": lambda player: player.equip_item( Weapon(player.level, player.name, "Dragon_sword")
         )}
     ],
     
     "Ice king": [
         {"name": "Ice Gem",
-         "cost": 62,
+         "cost": 70,
          "type": "Weapon_upgrade",
          "description": "Makes ice spells 20% stronger",
-         "requirement": lambda player: player.gold >= 120,
+         "requirement": lambda player: player.gold >= 70,
          "effect": lambda player: (
              setattr(player.weapon, 'min_damage', int(player.weapon.min_damage * 1.2)),
              setattr(player.weapon, 'max_damage', int(player.weapon.max_damage * 1.2)),
@@ -63,7 +63,7 @@ character_specific_items = {
          "cost": 173,
          "type": "Healing",
          "description": "+20 HP",
-         "requirement": lambda player: player.gold >= 180,
+         "requirement": lambda player: player.gold >= 173,
          "effect": lambda player: player.heal(20)
         }
     ],
@@ -73,7 +73,7 @@ character_specific_items = {
          "cost": 76,
          "type": "Weapon",
          "description": "Do not underestimate",
-         "requirement": lambda player: player.gold >= 60,
+         "requirement": lambda player: player.gold >= 76,
          "effect": lambda player: player.equip_item( Weapon(player.level, player.name, "Fork"))
         },
         
@@ -81,7 +81,7 @@ character_specific_items = {
          "cost": 67,
          "type": "Healing",
          "description": "Restores 20 HP",
-         "requirement": lambda player: player.gold >= 90,
+         "requirement": lambda player: player.gold >= 67,
          "effect": lambda player: (
               player.heal(20),
               print("🥧 Yum Yum! +20 HP!"))
@@ -159,3 +159,4 @@ class Shop:
             else:
                 print("Please enter a  number or '123' to leave")
               
+
