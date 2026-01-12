@@ -1,7 +1,8 @@
 import Colors
 from colorama import Fore
+#https://patorjk.com/software/taag/#p=testall&f=BlurVision+ASCII&t=Battle+round&x=none&v=4&h=4&w=80&we=false style= pagga <---- voor de mooie lettertype
 ASCII = {
-    #https://patorjk.com/software/taag/#p=testall&f=BlurVision+ASCII&t=Battle+round&x=none&v=4&h=4&w=80&we=false style= pagga
+    
     "Start": Colors.Color.YELLOW + r"""⠀⠀
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
     ⠀⠀⠀⠀⠀⠀⠀⢰⣿⡟⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -206,12 +207,11 @@ ASCII = {
     """
     }
 
-def display_art(art_name, kleur=None):  # 2 parameters: art_name EN kleur
-    """Print ASCII art by name met optionele kleur"""
+def display_art(art_name, kleur=None):  
     if art_name in ASCII:
         art = ASCII[art_name]
         
-        # Voeg kleur toe als opgegeven
+        # Voeg kleur toe als art een kleur heeft
         if kleur == "rood":
             print(Fore.RED + art)
         elif kleur == "geel":
@@ -232,6 +232,7 @@ def display_art(art_name, kleur=None):  # 2 parameters: art_name EN kleur
                                                                                                                                                           
         
         
+
 
 
 
