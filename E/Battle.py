@@ -9,7 +9,8 @@ import Locations
 import Ascii
 import random
 import time
-
+import Colors
+printer = Colors.TextPrinter()
 
 def text_effect(text):
     for letter in text:
@@ -313,14 +314,15 @@ class Battle:
                 break
             
             if self.player.hp <= 0:
-                print("\n" + "#"*82)
-                print("\n" + "!"*82)
-                print("\n" + "!!!" + " You are dead " +"!"*65)
-                print("\n" + "!"*82)
-                print("\n" + "#"*82)
+                printer.print_red("\n" + "#"*82)
+                printer.print_red("\n" + "!"*82)
+                printer.print_red("\n" + "!!!" + " You are dead " +"!"*65)
+                printer.print_red("\n" + "!"*82)
+                printer.print_red("\n" + "#"*82)
                  
                 break
                 
+
 
 
 
