@@ -156,7 +156,7 @@ class FinalBoss(Monster):
     def __init__(self, level):
         Monster.__init__(self, level)
         self.monster_type = "👑 Corrupted Candy King 👑"
-        self.hp = self.max_hp = 100
+        self.hp = self.max_hp = 75
         self.min_damage = 10
         self.max_damage = 25
         self.xp_value = 500 + level * 200
@@ -171,7 +171,6 @@ class FinalBoss(Monster):
         
         damage = random.randint(self.min_damage, self.max_damage)
 
-        # Enrage fase
         if self.hp <= self.max_hp * 0.3 and not self.enraged:
             print("🔥 THE CANDY KING GOES BERSERK!! 🔥")
             self.min_damage += 5
@@ -195,7 +194,7 @@ class FinalBoss(Monster):
         c = random.randint(1, 5)
 
         correct_answer = a * b + c
-        time_limit = 5  # seconden
+        time_limit = 15  # seconden
 
         print(f"🧠 {a} × {b} + {c} = ?")
         print(f"(You have {time_limit} seconds!)")
@@ -223,13 +222,14 @@ class FinalBoss(Monster):
             print(f"💥 You take {puzzle_damage} damage!")
 
     def candy_overload(self, player):
-        # 80% kans op extra aanval
-        if random.randint(1, 100) <= 80:
+        # 40% kans op extra aanval
+        if random.randint(1, 100) <= 40:
             print("🍬 SUGAR OVERLOAD!")
             print("⚡ You are forced to attack again!")
 
             extra_damage = player.attack()
             self.take_hit(extra_damage)
+
 
 
 
