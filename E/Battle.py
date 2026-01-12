@@ -235,7 +235,7 @@ class Battle:
             
             has_shop = False  # default
             for location in Locations.LOCATIONS:
-                if location["name"] == self.current_location_name:
+                if location["name"] == self.current_location_name: #dus location verwijst naar dictionary LOCATIONS en met [ en ] wordt de value bij de key "name" opgehaald
                     has_shop = location.get("has_shop", False)
                     break
                 
@@ -244,7 +244,7 @@ class Battle:
                 while player_action not in ["S","F","H","R", "O", "V", "Q"]:
                     player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, sh(O)p, sa(V)e, (Q)uit ").upper()
                     print()
-            else:
+            else: #geen shop? Ook geen shop optie!
                 player_action = " "
                 while player_action not in ["S","F","H","R", "V", "Q"]:
                     player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, sa(V)e, (Q)uit ").upper()
@@ -267,14 +267,14 @@ class Battle:
                 else:
                     print()
                     print("\n" + "#"*90)
-                    printer.print_green( "####" + "  YOU WON ✧⁺⸜(･ ᗜ ･ )⸝⁺✧  " +"#"*60)
+                    printer.print_green( "####" + "  YOU WON ✧⁺⸜(･ ᗜ ･ )⸝⁺✧  " +"#"*60) #Dit zou in het groen moeten wordt uitgeprint
                     print("#"*90)
                     
                     self.player.xp_gain(self.xp_value)
                     self.player.gold_gain(self.gold_value)
                     self.generate_loot()
                     input("[PRESS ENTER TO CONTINUE]")
-                    self.player.level += 1
+                    self.player.level += 1 #Logica: als spelers de battle wint dan mag het door naar de volgende lvl/ locatie
                     break
                 
             elif player_action == "H":
@@ -289,8 +289,8 @@ class Battle:
                     self.monster_attack()
                     
             elif player_action == "O":
-                    shop = Shop(self.player)
-                    shop.shop_loop()
+                shop = Shop(self.player)
+                shop.shop_loop()
                 
             elif player_action == "V":
                 save_game(self.player)    
@@ -308,6 +308,7 @@ class Battle:
                  
                 break
                 
+
 
 
 
