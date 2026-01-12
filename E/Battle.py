@@ -233,13 +233,13 @@ class Battle:
             #print("\n" + "###" + " BATTLE ROUND " + "#"*60)
             self.battle_stats()
             
-            not_has_shop = False  # default
+            has_shop = False  # default
             for location in Locations.LOCATIONS:
                 if location["name"] == self.current_location_name:
-                    not_has_shop = location.get("has_shop", False)
+                    has_shop = location.get("has_shop", False)
                     break
                 
-            if not_has_shop:
+            if has_shop: #wel een shop betekent wel de optie shop gegeven
                 player_action = " "
                 while player_action not in ["S","F","H","R", "O", "V", "Q"]:
                     player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, sh(O)p, sa(V)e, (Q)uit ").upper()
@@ -308,6 +308,7 @@ class Battle:
                  
                 break
                 
+
 
 
 
