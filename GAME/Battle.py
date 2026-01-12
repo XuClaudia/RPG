@@ -255,12 +255,12 @@ class Battle:
             if not_has_shop:
                 player_action = " "
                 while player_action not in ["S","F","H","R", "O", "V", "Q"]:
-                    player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, sh(O)p, sa(V)e, (Q)uit").upper()
+                    player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, sh(O)p, sa(V)e, (Q)uit ").upper()
                     print()
             else:
                 player_action = " "
                 while player_action not in ["S","F","H","R", "V", "Q"]:
-                    player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, sa(V)e, (Q)uit").upper()
+                    player_action = input("What will you do? (S)tats, (F)ight, (H)eal, (R)un, sa(V)e, (Q)uit ").upper()
                     print()
             
             if player_action == "S":
@@ -321,6 +321,7 @@ class Battle:
                  
                 break
                 
+
 
 
 
