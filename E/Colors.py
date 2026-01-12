@@ -1,5 +1,5 @@
 from colorama import init, Fore, Back, Style
-
+#Door AI gegenereert, want hier was echt geen kennis over
 # Initialiseer colorama 
 init(autoreset=True)
 #------------ Ascii art kleur toewijzen-------------
@@ -42,4 +42,5 @@ class TextPrinter:
         
         color = color_map.get(color_name.lower(), self.colors.WHITE) #KLeur geven en anders wit
         print(color + text) #tekst in de bijbehorende kleur printen
+
 
