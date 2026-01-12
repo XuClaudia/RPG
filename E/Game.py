@@ -8,7 +8,7 @@ import random
 import time
 import Ascii
 
-def text_effect(text):
+def text_effect(text): #deze functie zorgt voor een type-writer effect door na elke letter voor 0.02 te wachten
     for letter in text:
         print(letter, end="")
         time.sleep(0.02)
@@ -32,13 +32,14 @@ if has_save:
     else:
         print("Starting a new game...\n")
         print("="*90)
+        
 Ascii.display_art("Start")
 time.sleep(1.5)
 starttekst = [
-"            ~~  Adventure Time Come on, grab your friends  ~~",
-"            ~~       We'll go to very distant lands        ~~",
-"            ~~    With Jake the Dog and Finn the Human     ~~",
-"            ~~ The fun will never end, it's Adventure Time ~~"
+"           ~~  Adventure Time Come on, grab your friends  ~~",
+"           ~~       We'll go to very distant lands        ~~",
+"           ~~    With Jake the Dog and Finn the Human     ~~",
+"           ~~ The fun will never end, it's Adventure Time ~~"
 ]
 for tekst in starttekst:
     print(tekst)
@@ -53,7 +54,7 @@ print()
 
 #---------------- KARAKTER KIEZEN -----------------------
 if player is None:
-    #spelertype
+    #Een speler kiezen - krijgt een andere wapen 
     player_name = " "
     while player_name not in ["A","B","C", "FINN", "ICE KING", "TREE TRUNKS"]:
         #Speler kiest A, B of C 
@@ -76,7 +77,7 @@ if player is None:
     print("  Name: " + player.name)
     print("  Level: " + str(player.level) )
     print("  HP: " + str(player.hp) + "/" + str(player.max_hp))
-    print("  XP: " + str(player.xp))# + "/" + str(player.next_level_xp))
+    print("  XP: " + str(player.xp))
     print("  Gold: " + str(player.gold))
     print("-"*90 )
     input("[PRESS ENTER TO CONTINUE]")
@@ -98,14 +99,14 @@ if player is None:
 #---------------- ROUTE ------------------------------------------------------
 #---------------- BATTLE -----------------------------------------------------
 #Ascii.display_art("Map")
-current_location_index = 0
+current_location_index = 0 #Candy kingdom > zie Locations.py
 battle_count = 0
-previous_level = player.level
+previous_level = player.level #level gaan omhoog per overwonnen battle en niet bepaalde xp
 
-while player.hp > 0 and current_location_index < len(LOCATIONS):
+while player.hp > 0 and current_location_index < len(LOCATIONS): 
     location = LOCATIONS[current_location_index]
     # Checken of de speler de volgende level mag doen
-    if player.level < location["unlock_level"]:
+    if player.level < location["unlock_level"]: #key-value list location verwijst naar de dictionary LOCATIONS met key unlock level
         print(f"\n🔒 {location['name']} is locked!")
         print(f"   Required level: {location['unlock_level']}")
         print(f"   Your level: {player.level}")
@@ -138,6 +139,8 @@ while player.hp > 0 and current_location_index < len(LOCATIONS):
         print(f"   Shop: {'✓' if location['has_shop'] else '✗'}")
         print("-"*90)
         input("\n[PRESS ENTER TO CONTINUE]")
+
+        #---Backgroundstories------------------------------------
         
         text_effect(f"\n⚔️ You arrived at {location['name']}!\n")
         if location["name"] == "Candy Kingdom":
@@ -148,6 +151,7 @@ while player.hp > 0 and current_location_index < len(LOCATIONS):
             text_effect("🌀 Jelly monsters wobbling through gumdrop fields\n")
             text_effect("👁 Evil Eyes peering from candy cane forests\n")
             text_effect("💀 Goo Skulls leaving slimy trails through powdered sugar\n")
+            time.sleep(0.5)
             text_effect("hungry for any intruder who dares enter their sugary domain.\n")
         elif location["name"] == "Lumpy Space":
             text_effect("Something about Lumpy Space attracts the weirdest monsters in Ooo.\n Maybe it's the lumps,\n")
@@ -268,5 +272,6 @@ print("Your final stats are:")
 player.print_stats()
 print()
 print("Thanks for playing")
+
 
 
