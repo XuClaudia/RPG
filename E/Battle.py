@@ -119,7 +119,7 @@ class Battle:
                 continue
             #van hier tot r. 126 (monster.sugar_effect(self.player)) is gemaakt m.b.v. AI\
             
-            if isinstance(monster, Zombie):  # Zombie effect: weapon verzwakken / isinstance controleerd of de monster bestaat   
+            if isinstance(monster, Zombie):  # Zombie effect: weapon verzwakken / isinstance controleerd of de monster een instance is van Zombie
                 print("Whwuuuubuuu whwuuubuu BRAINS.\nI will destroy your WEAPON!")
                 print("Before:", self.player.weapon.min_damage, "-", self.player.weapon.max_damage)
                     
@@ -137,12 +137,12 @@ class Battle:
             monster_damage = monster.attack()
             self.player.take_hit(monster_damage)
             
-       #Als het een Candy is, voer sugar effect uit     
-            if isinstance(monster, Candy):
+         
+            if isinstance(monster, Candy): #Als het een Candy is, voer sugar effect uit  
                 monster.sugar_effect(self.player)
             
-       #Als het een evil_eyes is dan voert die zijn effect uit.     
-            if isinstance(monster, Evil_eyes):
+      
+            if isinstance(monster, Evil_eyes): #Als het een evil_eyes is dan voert die zijn effect uit.     
                 monster.verzwak_armor(self.player)
             
             if isinstance(monster, FinalBoss):
@@ -171,19 +171,6 @@ class Battle:
         monster = self.monster_list[target]
             
         #Strijdkreetjes van de monsters
-        if isinstance (monster, Zombie):
-           # print("Whwuuuubuuu whwuuubuu BRAINS.\n")
-           # time.sleep(1)
-           # print("I will destroy your WEAPON\n")
-
-            self.player.weapon.print_stats()
-           # print("--->")
-           # original_max = self.player.weapon.max_damage
-            #self.player.weapon.min_damage = max(1, self.player.weapon.min_damage - 1)
-            #self.player.weapon.max_damage = max(self.player.weapon.min_damage, int(original_max * 0.75))
-            #self.player.weapon.print_stats()
-            #time.sleep(2)
-            
         elif isinstance (monster, Candy):
             text_effect("My taste may be sweet BUT\n")
             time.sleep(0.5)
@@ -321,6 +308,7 @@ class Battle:
                  
                 break
                 
+
 
 
 
